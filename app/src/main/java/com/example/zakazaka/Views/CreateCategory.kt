@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity.MODE_PRIVATE
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
@@ -26,6 +27,8 @@ import com.example.zakazaka.ViewModels.CategoryViewModel
 import com.example.zakazaka.ViewModels.HowToViewModel
 import com.example.zakazaka.ViewModels.SubCategoryViewModel
 import com.example.zakazaka.ViewModels.ViewModelFactory
+import android.content.Context.MODE_PRIVATE
+
 
 class CreateCategory : AppCompatActivity() {
     private var categoryId: Long = 0
@@ -48,9 +51,12 @@ class CreateCategory : AppCompatActivity() {
 
         //initalizes the HowToView viewModel
         val howtoViewModel = HowToViewModel()
-        howtoViewModel.accountViewModel = AccountViewModel(AccountRepository(AppDatabase.getDatabase(this).accountDao()))
-        howtoViewModel.budgetGoalViewModel = BudgetGoalViewModel(BudgetGoalRepository(AppDatabase.getDatabase(this).budgetGoalDao()))
-        howtoViewModel.categoryViewModel = CategoryViewModel(CategoryRepository(AppDatabase.getDatabase(this).categoryDao()))
+        howtoViewModel.accountViewModel =
+            AccountViewModel(AccountRepository(AppDatabase.getDatabase(this).accountDao()))
+        howtoViewModel.budgetGoalViewModel =
+            BudgetGoalViewModel(BudgetGoalRepository(AppDatabase.getDatabase(this).budgetGoalDao()))
+        howtoViewModel.categoryViewModel =
+            CategoryViewModel(CategoryRepository(AppDatabase.getDatabase(this).categoryDao()))
         //initialize the ViewModelFactory
         val factory = ViewModelFactory(
             UserRepository(AppDatabase.getDatabase(this).userDao()),
@@ -60,72 +66,45 @@ class CreateCategory : AppCompatActivity() {
             SubCategoryRepository(AppDatabase.getDatabase(this).subCategoryDao()),
             TransactionRepository(AppDatabase.getDatabase(this).transactionDao())
         )
-        val categoryViewModel = ViewModelProvider(this,factory)[CategoryViewModel::class.java]
-        val subCategoryViewModel = ViewModelProvider(this,factory)[SubCategoryViewModel::class.java]
+        categoryViewModel = ViewModelProvider(this, factory)[CategoryViewModel::class.java]
+        subCategoryViewModel = ViewModelProvider(this, factory)[SubCategoryViewModel::class.java]
 
         val btnCreateCategory = findViewById<Button>(R.id.btnCategory)
         val btnCreateSubCategory = findViewById<Button>(R.id.btnCreateSubCategory)
 
 
-
-
-        // To Retrieve the category ID from SharedPreferences
-        val sharedPrefs = getSharedPreferences("BudgetPrefs", MODE_PRIVATE)
-        categoryId = sharedPrefs.getLong("CREATED_CATEGORY_ID", 0)
-
-
-
-        // Check if we got a valid user ID
-        if (userId == 0L) {
-            // Try to get it from intent as fallback
-            userId = intent.getLongExtra("USER_ID", 0)
-
-            if (userId == 0L) {
-                Toast.makeText(this, "Error: User ID not found", Toast.LENGTH_SHORT).show()
-                finish() // Close the activity if no user ID is found
-                return
+        //use the button click listener events to call the methods repsonsible for adding a new category
+        btnCreateCategory.setOnClickListener {
+            val edCategoryName = findViewById<EditText>(R.id.edCategoryName).text.toString()
+            val edBudgetLimit = findViewById<EditText>(R.id.edCategoryLimit).text.toString()
+            if (edCategoryName.isEmpty() || edBudgetLimit.isEmpty()) {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            } else {
+                setupCategoryCreation(edCategoryName, edBudgetLimit.toDouble())
             }
         }
-
-        // If not found, try get from Intent
-        if (categoryId == 0L) {
-            categoryId = intent.getLongExtra("CATEGORY_ID", 0)
-            if (categoryId == 0L) {
-                Toast.makeText(this, "Error: Category ID not found", Toast.LENGTH_SHORT).show()
-                finish()
-                return
+        btnCreateSubCategory.setOnClickListener {
+            val edSubCategoryName = findViewById<EditText>(R.id.edSubCategoryName).text.toString()
+            val edSubCategoryBudgetLimit =
+                findViewById<EditText>(R.id.edSubCategoryLimit).text.toString()
+            //val edSubCategoryDescription = findViewById<EditText>(R.id.edDescription)
+            if (edSubCategoryName.isEmpty() || edSubCategoryBudgetLimit.isEmpty()) {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            } else {
+                setupSubCategoryCreation(edSubCategoryName, edSubCategoryBudgetLimit.toDouble())
             }
         }
-
-
-
-        // Now call the method to set up category creation
-        setupCategoryCreation()
-
-        // Now call method to set up subcategory creation
-        setupSubCategoryCreation()
+    }
 
         // Optional: Display user ID for debugging
         // Toast.makeText(this, "User ID: $userId", Toast.LENGTH_SHORT).show()
-    }
 
-    private fun setupCategoryCreation() {
-        val edCategoryName = findViewById<EditText>(R.id.edCategoryName)
-        val edBudgetLimit = findViewById<EditText>(R.id.edCategoryLimit)
-        val btnCreateCategory = findViewById<Button>(R.id.btnCategory)
 
-        btnCreateCategory.setOnClickListener {
-            val categoryName = edCategoryName.text.toString()
-            val budgetLimitText = edBudgetLimit.text.toString()
-
-            if (categoryName.isEmpty() || budgetLimitText.isEmpty()) {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+    private fun setupCategoryCreation(categoryName:String, budgetLimit:Double) {
 
             try {
-                val budgetLimit = budgetLimitText.toDouble()
-
                 // Create new category entity with the userId
                 val newCategory = CategoryEntity(
                     name = categoryName,
@@ -148,11 +127,6 @@ class CreateCategory : AppCompatActivity() {
                             apply()
                         }
 
-                        // Clear input fields
-                        edCategoryName.text.clear()
-                        edBudgetLimit.text.clear()
-
-
                     } else {
                         Toast.makeText(this, "Failed to create category", Toast.LENGTH_SHORT).show()
                     }
@@ -165,26 +139,15 @@ class CreateCategory : AppCompatActivity() {
                 Toast.makeText(this, "Please enter a valid budget limit", Toast.LENGTH_SHORT).show()
             }
         }
-    }
 
-    private fun setupSubCategoryCreation() {
-        val edSubCategoryName = findViewById<EditText>(R.id.edSubCategoryName)
-        val edSubCategoryBudgetLimit = findViewById<EditText>(R.id.edSubCategoryLimit)
-        //val edSubCategoryDescription = findViewById<EditText>(R.id.edDescription)
-        val btnCreateSubCategory = findViewById<Button>(R.id.btnCreateSubCategory)
 
-        btnCreateSubCategory.setOnClickListener {
-            val subCategoryName = edSubCategoryName.text.toString()
-            val budgetLimitText = edSubCategoryBudgetLimit.text.toString()
-            //val description = edSubCategoryDescription.text.toString()
-
-            if (subCategoryName.isEmpty() || budgetLimitText.isEmpty()) {
-                Toast.makeText(this, "Please fill in the subcategory name and budget limit", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+    private fun setupSubCategoryCreation(subCategoryName: String, budgetLimit: Double) {
 
             try {
-                val budgetLimit = budgetLimitText.toDouble()
+                // To Retrieve the category ID from SharedPreferences
+                val sharedPrefs = getSharedPreferences("BudgetPrefs", MODE_PRIVATE)
+                val categoryId = sharedPrefs.getLong("CREATED_CATEGORY_ID", 0)
+
 
                 // Create a new SubCategoryEntity
                 val newSubCategory = SubCategoryEntity(
@@ -196,22 +159,17 @@ class CreateCategory : AppCompatActivity() {
                 )
 
                 // Save subcategory to database
-                subCategoryViewModel.createSubCategory(newSubCategory)
-                Toast.makeText(this, "Subcategory created successfully", Toast.LENGTH_SHORT).show()
-
-                // Clear input fields
-                edSubCategoryName.text.clear()
-                edSubCategoryBudgetLimit.text.clear()
-               // edSubCategoryDescription.text.clear()
-
-                // (Optional) Navigate back to previous screen
-                // finish()
-
+                val createdSubCategoryLiveData = subCategoryViewModel.createSubCategory(newSubCategory)
+                createdSubCategoryLiveData.observe(this,) { subCategory ->
+                    if (subCategory != null) {
+                        Toast.makeText(this, "Subcategory created successfully", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "Failed to create subcategory", Toast.LENGTH_SHORT).show()
+                    }
+                }
             } catch (e: NumberFormatException) {
                 Toast.makeText(this, "Please enter a valid budget limit", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-
 }
+

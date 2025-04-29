@@ -10,6 +10,7 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="59dp"
         app:defaultNavHost="true"
         app:navGraph="@navigation/dashboard_nav_graph" />
 
@@ -18,7 +19,11 @@
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:itemTextColor="@color/primaryColour"
         android:layout_gravity="bottom"
+        app:labelVisibilityMode="labeled"
+        app:itemIconTint="@color/zakaDarkGreen"
         app:menu="@menu/bottom_nav_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
