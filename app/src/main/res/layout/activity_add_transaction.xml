@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/transMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp">
+
+            <!-- Back icon on the left -->
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/more_vert" />
+
+            <!-- Spacer pushes the next icon to the right -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <!-- Edit icon on the right -->
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_edit" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp">
+
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Add Transactions"
+                android:textColor="#C19602"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Account Name"
+            android:textColor="#004D00"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/acc_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter account name"
+            android:inputType="text"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="E.g., Savings"
+            android:textColor="#888888"
+            android:textSize="12sp" />
+
+        <!-- Budget Limit -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Date of Transaction"
+            android:textColor="#004D00"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/dateOfTransaction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="MM/DD/YYYY"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Type"
+            android:textColor="#004D00"
+            android:textStyle="bold" />
+
+        <!-- Subcategory Header -->
+        <EditText
+            android:id="@+id/category_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter subcategory name"
+            android:inputType="text"
+            android:minHeight="48dp" />
+
+        <!-- Subcategory Name -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Expense category"
+            android:textColor="#004D00"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/select_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select category"
+            android:inputType="text"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Subcategory"
+            android:textColor="#004D00"
+            android:textStyle="bold" />
+
+        <!-- Subcategory Budget Limit -->
+
+        <EditText
+            android:id="@+id/select_subcategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select Subcategory"
+            android:inputType="text"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Amount"
+            android:textColor="#004D00"
+            android:textStyle="bold" />
+
+        <!-- Recurring Expense -->
+        <EditText
+            android:id="@+id/recurring_Expense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="amount"
+            android:inputType="text"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Recurring Expense"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/recurringEx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select : Weekly, Monthly, No"
+            android:inputType="text"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="If selected type is transfer"
+            android:textColor="#C19602"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Subcategory Name -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Accounts for transfer"
+            android:textColor="#004D00"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/acc_from"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="From "
+            android:inputType="text"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/acc_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="To"
+            android:inputType="text"
+            android:minHeight="48dp" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="E.g From Savings to Transactional"
+            android:textColor="#888888"
+            android:textSize="12sp" />
+
+        <!-- Create Subcategory Button -->
+        <Button
+            android:id="@+id/btnUpload_receipt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#003300"
+            android:text="Upload Receipt"
+            android:textColor="#FFFFFF" />
+
+        <EditText
+            android:id="@+id/editTextDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date" />
+
+        <!-- Create Category Button -->
+
+    </LinearLayout>
+</ScrollView>
