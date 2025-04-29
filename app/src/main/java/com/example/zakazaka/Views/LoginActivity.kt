@@ -77,6 +77,11 @@ class LoginActivity : AppCompatActivity() {
                         howtoViewModel.isHowtoCompleted(u.userID){ completed ->
                             if(!completed) {
                                 Toast.makeText(this, "Let's get you started", Toast.LENGTH_SHORT).show()
+                                val sharedPref = getSharedPreferences("BudgetAppPrefs", MODE_PRIVATE)
+                                with (sharedPref.edit()) {
+                                    putLong("LOGGED_USER_ID", u.userID)
+                                    apply()
+                                }
                                 val intent = Intent(this, HowToGetStarted::class.java)
                                 intent.putExtra("USER_ID", u.userID)
                                 startActivity(intent)

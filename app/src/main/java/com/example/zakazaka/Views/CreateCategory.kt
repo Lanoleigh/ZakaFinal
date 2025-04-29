@@ -46,6 +46,8 @@ class CreateCategory : AppCompatActivity() {
         val sharedPref = getSharedPreferences("BudgetAppPrefs", MODE_PRIVATE)
         userId = sharedPref.getLong("LOGGED_USER_ID", 0)
 
+        //Toast.makeText("User ID: $userId", Toast.LENGTH_SHORT).show()
+
         //initalizes the HowToView viewModel
         val howtoViewModel = HowToViewModel()
         howtoViewModel.accountViewModel = AccountViewModel(AccountRepository(AppDatabase.getDatabase(this).accountDao()))
@@ -70,8 +72,8 @@ class CreateCategory : AppCompatActivity() {
 
 
         // To Retrieve the category ID from SharedPreferences
-        val sharedPrefs = getSharedPreferences("BudgetPrefs", MODE_PRIVATE)
-        categoryId = sharedPrefs.getLong("CREATED_CATEGORY_ID", 0)
+//        val sharedPrefs = getSharedPreferences("BudgetPrefs", MODE_PRIVATE)
+//        categoryId = sharedPrefs.getLong("CREATED_CATEGORY_ID", 0)
 
 
 
@@ -88,14 +90,14 @@ class CreateCategory : AppCompatActivity() {
         }
 
         // If not found, try get from Intent
-        if (categoryId == 0L) {
-            categoryId = intent.getLongExtra("CATEGORY_ID", 0)
-            if (categoryId == 0L) {
-                Toast.makeText(this, "Error: Category ID not found", Toast.LENGTH_SHORT).show()
-                finish()
-                return
-            }
-        }
+//        if (categoryId == 0L) {
+//            categoryId = intent.getLongExtra("CATEGORY_ID", 0)
+//            if (categoryId == 0L) {
+//                Toast.makeText(this, "Error: Category ID not found", Toast.LENGTH_SHORT).show()
+//                finish()
+//                return
+//            }
+//        }
 
 
 
