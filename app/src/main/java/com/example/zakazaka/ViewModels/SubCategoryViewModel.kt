@@ -19,6 +19,14 @@ class SubCategoryViewModel @Inject constructor(private val repository: SubCatego
         }
         return subCategoryID
     }
+    fun getSubCategoriesForCategory(categoryID:Long):LiveData<List<SubCategoryEntity>>{
+        val subCategories = MutableLiveData<List<SubCategoryEntity>>()
+        viewModelScope.launch(Dispatchers.IO){
+            subCategories.postValue(repository.getSubCategoriesForCategory(categoryID))
+        }
+        return subCategories
+
+    }
     fun getSubCategories(): LiveData<List<SubCategoryEntity>> {
         //functionality to return a list of all subcategories
         return repository.readAllData

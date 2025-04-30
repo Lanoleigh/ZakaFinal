@@ -2,6 +2,7 @@ package com.example.zakazaka.ViewModels
 
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.zakazaka.Models.TransactionEntity
@@ -13,10 +14,8 @@ import javax.inject.Inject
 
 class TransactionViewModel @Inject constructor(private val repository: TransactionRepository) : ViewModel() {
     //functionality to register a new transaction
-    fun enterNewTransaction(transaction: TransactionEntity){
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.addTransaction(transaction)
-        }
+    suspend fun enterNewTransaction(transaction: TransactionEntity):Long{
+        return repository.addTransaction(transaction)
     }
     fun getAllTransactions(): LiveData<List<TransactionEntity>> {
         return repository.getAllTransctions

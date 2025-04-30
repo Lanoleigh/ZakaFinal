@@ -51,7 +51,8 @@ class AddAccountActivity : AppCompatActivity() {
             TransactionRepository(AppDatabase.getDatabase(this).transactionDao())
         )
         val accountViewModel = ViewModelProvider(this,factory)[AccountViewModel::class.java]
-        val userId = intent.getLongExtra("USER_ID", -1)
+        val sharedPref = getSharedPreferences("BudgetAppPrefs", MODE_PRIVATE)
+        val userId = sharedPref.getLong("LOGGED_USER_ID", 0)
 
         val btnSaveAcc = findViewById<Button>(R.id.btnSaveAcc)
         btnSaveAcc.setOnClickListener {

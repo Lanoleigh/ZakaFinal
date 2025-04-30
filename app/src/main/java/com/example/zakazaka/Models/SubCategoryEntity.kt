@@ -23,4 +23,8 @@ data class SubCategoryEntity (//Reference Module Manual
     var budgetLimit : Double,
     var currentAmount : Double,
     var categoryID : Long
-)
+){
+    override fun toString():String{
+        return name
+    }
+}

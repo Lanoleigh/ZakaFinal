@@ -42,8 +42,12 @@ class CategoryViewModel @Inject constructor(private val repository: CategoryRepo
             repository.updateCategoryCurrentAmount(categoryID, amount)
         }
     }
-    suspend fun getCategoriesByUserId(userId:Long): List<CategoryEntity> {
-        return repository.getCategory(userId)
+    fun getCategoriesByUserId(userId:Long): LiveData<List<CategoryEntity>> {
+        val categories = MutableLiveData<List<CategoryEntity>>()
+        viewModelScope.launch(Dispatchers.IO) {
+            categories.postValue(repository.getCategory(userId))
+        }
+        return categories
     }
 
 }

@@ -20,7 +20,7 @@ import com.example.zakazaka.Models.UserEntity
     CategoryEntity::class,
     SubCategoryEntity::class,
     TransactionEntity::class],
-    version = 5)
+    version = 8)
 @TypeConverters(AppDatabase.Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 

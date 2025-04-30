@@ -21,10 +21,6 @@
             android:paddingBottom="16dp">
 
             <!-- Back icon on the left -->
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/more_vert" />
 
             <!-- Spacer pushes the next icon to the right -->
             <View
@@ -32,11 +28,7 @@
                 android:layout_height="1dp"
                 android:layout_weight="1" />
 
-            <!-- Edit icon on the right -->
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_edit" />
+
 
         </LinearLayout>
 
@@ -48,10 +40,7 @@
             android:paddingBottom="16dp">
 
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_back" />
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -70,13 +59,12 @@
             android:textColor="#004D00"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/acc_name"
+        <Spinner
+            android:id="@+id/sAccountName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter account name"
-            android:inputType="text"
-            android:minHeight="48dp" />
+            />
+
 
         <TextView
             android:layout_width="match_parent"
@@ -85,41 +73,6 @@
             android:textColor="#888888"
             android:textSize="12sp" />
 
-        <!-- Budget Limit -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Date of Transaction"
-            android:textColor="#004D00"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/dateOfTransaction"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="MM/DD/YYYY"
-            android:inputType="numberDecimal"
-            android:minHeight="48dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Type"
-            android:textColor="#004D00"
-            android:textStyle="bold" />
-
-        <!-- Subcategory Header -->
-        <EditText
-            android:id="@+id/category_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter subcategory name"
-            android:inputType="text"
-            android:minHeight="48dp" />
-
-        <!-- Subcategory Name -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,13 +81,10 @@
             android:textColor="#004D00"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/select_category"
+        <Spinner
+            android:id="@+id/sCategorySpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Select category"
-            android:inputType="text"
-            android:minHeight="48dp" />
+            android:layout_height="match_parent"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -145,12 +95,70 @@
             android:textStyle="bold" />
 
         <!-- Subcategory Budget Limit -->
-
-        <EditText
-            android:id="@+id/select_subcategory"
+        <Spinner
+            android:id="@+id/sSubCategorySpinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Select Subcategory"
+            android:layout_marginTop="12dp"
+            android:text="Date of Transaction"
+            android:textColor="#004D00"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnStartDate"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="Date of Transaction"
+                android:backgroundTint="@color/primaryColour"/>
+            <DatePicker
+                android:id="@+id/startDatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                />
+        </LinearLayout>
+        <EditText
+            android:id="@+id/dateOfTransaction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="MM/DD/YYYY"
+            android:inputType="text"
+            android:minHeight="48dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="End Date of Transaction"
+            android:textColor="#004D00"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnEndDatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="End Date of Transaction"
+                android:backgroundTint="@color/primaryColour"/>
+            <DatePicker
+                android:id="@+id/endDateDatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                />
+        </LinearLayout>
+        <EditText
+            android:id="@+id/dEndDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="MM/DD/YYYY"
             android:inputType="text"
             android:minHeight="48dp" />
 
@@ -162,89 +170,50 @@
             android:textColor="#004D00"
             android:textStyle="bold" />
 
-        <!-- Recurring Expense -->
         <EditText
-            android:id="@+id/recurring_Expense"
+            android:id="@+id/edAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="amount"
-            android:inputType="text"
+            android:hint="Amount"
+            android:inputType="numberDecimal"
             android:minHeight="48dp" />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Recurring Expense"
-            android:textColor="#000000"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/recurringEx"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Select : Weekly, Monthly, No"
-            android:inputType="text"
-            android:minHeight="48dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="If selected type is transfer"
-            android:textColor="#C19602"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <!-- Subcategory Name -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Accounts for transfer"
+            android:text="Description"
             android:textColor="#004D00"
             android:textStyle="bold" />
-
         <EditText
-            android:id="@+id/acc_from"
+            android:id="@+id/edDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="From "
-            android:inputType="text"
-            android:minHeight="48dp" />
+            android:hint="Short description of transaction"/>
 
-        <EditText
-            android:id="@+id/acc_to"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="To"
-            android:inputType="text"
-            android:minHeight="48dp" />
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="E.g From Savings to Transactional"
-            android:textColor="#888888"
-            android:textSize="12sp" />
 
         <!-- Create Subcategory Button -->
+
         <Button
             android:id="@+id/btnUpload_receipt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#003300"
             android:text="Upload Receipt"
+
             android:textColor="#FFFFFF" />
 
-        <EditText
-            android:id="@+id/editTextDate"
+        <Button
+            android:id="@+id/btnAddTransaction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="date" />
+            android:backgroundTint="#003300"
+            android:text="Add Transaction"
+            android:textColor="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
 
         <!-- Create Category Button -->
 
