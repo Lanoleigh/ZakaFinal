@@ -1,6 +1,8 @@
 package com.example.zakazaka.Views
 
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.Manifest
 import android.os.Bundle
 import android.os.Environment
 import android.view.View
@@ -15,6 +17,8 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -44,13 +48,14 @@ import java.util.Date
 import java.util.Locale
 
 class AddTransaction : AppCompatActivity() {
-    lateinit var imageUri : Uri
+    var imageUri : Uri? = null
     lateinit var transactionViewModel : TransactionViewModel
     lateinit var categoryViewModel: CategoryViewModel
     lateinit var subCategoryViewModel: SubCategoryViewModel
     lateinit var accountViewModel: AccountViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_add_transaction)
@@ -166,7 +171,7 @@ class AddTransaction : AppCompatActivity() {
                         currency = "ZAR",
                         subCategoryID = selectedSubCategory.subCategoryID,//get from spinner
                         accountID = selectedAccount.accountID,
-                        imagePath = imageUri.path//get from spinner
+                        imagePath = imageUri?.toString()//get from spinner
                     )
                     lifecycleScope.launch{
                         val transId = transactionViewModel.enterNewTransaction(transaction)
@@ -188,7 +193,11 @@ class AddTransaction : AppCompatActivity() {
         }
         try{
             findViewById<Button>(R.id.btnUpload_receipt).setOnClickListener {
-                launchCamera()
+                if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA),100)
+                }else{
+                    launchCamera()
+                }
             }
         }catch(e:Exception){
             Toast.makeText(this,"Error launching camera",Toast.LENGTH_SHORT).show()
@@ -201,15 +210,27 @@ class AddTransaction : AppCompatActivity() {
         val format = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
         return format.parse(this)?: Date()
     }
-    private val takePictureLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()){
-        success ->
-        if(success){
-            findViewById<ImageView>(R.id.imageView).setImageURI(imageUri)
+    private val takePictureLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()) { takePicure ->
+        val uri = imageUri
+        if(takePicure){
+            if(takePicure && uri != null) {
+                findViewById<ImageView>(R.id.imageView).setImageURI(imageUri)
+            }
         }
+
     }
     private fun launchCamera(){
-        val photoF = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES),"photo_${System.currentTimeMillis()}.jpg")
-        imageUri = FileProvider.getUriForFile(this,".fileprovider",photoF)
-        takePictureLauncher.launch(imageUri)
+        val photo = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "photo.jpg")
+        val uri = FileProvider.getUriForFile(this, "$packageName.provider", photo)
+        imageUri = uri
+        takePictureLauncher.launch(uri)
+    }
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray){
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode == 100 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            launchCamera()
+        }else{
+            Toast.makeText(this,"Camera Persmission is required",Toast.LENGTH_LONG).show()
+        }
     }
 }
