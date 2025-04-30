@@ -1,6 +1,7 @@
 package com.example.zakazaka.ViewModels
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.zakazaka.Models.BudgetGoalEntity
@@ -11,25 +12,24 @@ import javax.inject.Inject
 
 class BudgetGoalViewModel @Inject constructor(private val repository: BudgetGoalRepository) :
     ViewModel() {
-    suspend fun setMonthlyGoal(amount:Double){
+    fun getAllBudgetGoals(): LiveData<List<BudgetGoalEntity>> {
+        return repository.readAllBudgetGoals
     }
-    fun getUserStatus():String{
-        return ""
-    }
-    suspend fun updateUserStatus(currentStatus:String){
-    }
-    suspend fun setMinimumGoal(amount:Double){
-
-    }
-    suspend fun getBudgetGoal(userId:Long): List<BudgetGoalEntity> {
-        return  repository.getBudgetGoalsByUserId(userId)
-    }
-    fun addBudgetGoal(budgetGoal: BudgetGoalEntity){
+    fun getBudgetGoal(userId:Long): LiveData<List<BudgetGoalEntity>> {
+        val budgetGoals = MutableLiveData<List<BudgetGoalEntity>>()
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addBudgetGoal(budgetGoal)
+            budgetGoals.postValue(repository.getBudgetGoalsByUserId(userId))
         }
-
+        return budgetGoals
     }
+    fun addBudgetGoal(budgetGoal: BudgetGoalEntity) :LiveData<Long>{
+        val id = MutableLiveData<Long>()
+        viewModelScope.launch(Dispatchers.IO) {
+            id.postValue(repository.addBudgetGoal(budgetGoal))
+        }
+        return id
+    }
+
     fun updateBudgetGoal(budgetGoal: BudgetGoalEntity){
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateBudgetGoal(budgetGoal)

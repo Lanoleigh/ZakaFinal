@@ -19,7 +19,7 @@ interface CategoryDao {
 
     //so here we are going to be retrieving the categories created by a specific user.
     @Query("SELECT * FROM Category WHERE userId = :userId")
-    fun getCategoriesByUserId(userId: Long): LiveData<List<CategoryEntity>>
+    fun getCategoriesByUserId(userId: Long): List<CategoryEntity>
 
     //so here we are going to be retrieving the categories created by a specific user.
     @Query("SELECT * FROM Category WHERE userID = :userId")

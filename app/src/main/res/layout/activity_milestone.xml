@@ -248,18 +248,29 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="16dp"
-                    android:text="Set Your Budget Goal"
+                    android:text="Set Your Monthly Budget Goal"
                     android:textColor="@color/primaryColour2"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <!-- Budget Goal Input -->
                 <EditText
+                    android:id="@+id/edMinimumBudget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/edittext_bg"
+                    android:hint="Enter your minimum budget (e.g. R800)"
+                    android:inputType="number"
+                    android:padding="12dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#AAAAAA" />
+                <EditText
                     android:id="@+id/budgetGoalInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edittext_bg"
-                    android:hint="Enter your goal amount (e.g. R1000)"
+                    android:hint="Enter your maximum amount (e.g. R1000)"
                     android:inputType="number"
                     android:padding="12dp"
                     android:textColor="#000000"
@@ -267,14 +278,14 @@
 
                 <!-- Save Button -->
                 <Button
-                    android:id="@+id/saveBudgetGoalButton"
+                    android:id="@+id/btnSaveBudgetGoal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/button_light_yellow"
+                    android:backgroundTint="@color/primaryColour"
                     android:minHeight="48dp"
                     android:text="Save Goal"
-                    android:textColor="@color/primaryColour2"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
 

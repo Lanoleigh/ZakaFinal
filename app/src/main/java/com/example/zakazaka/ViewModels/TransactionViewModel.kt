@@ -36,9 +36,6 @@ class TransactionViewModel @Inject constructor(private val repository: Transacti
     //functionality to return a list of all transactions by an account
     fun getTransactionsByAccount(accountID:Long): LiveData<List<TransactionEntity>> {
         return repository.getTransactionsByAccount(accountID)
+    }
 
-    }
-    fun takeImage(transactionID: Long) {
-        //functionality to take image and save it to the transaction
-    }
 }

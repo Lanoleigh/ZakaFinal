@@ -86,7 +86,6 @@ class AddTransaction : AppCompatActivity() {
         //adding values to the spinners based of the users ID
         accountViewModel.getAccountsByUserId(userId).observe(this){ accounts ->
             val accNames = accounts.map { it.accountName }
-
             val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, accounts)
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             sAccSpiner.adapter = adapter
