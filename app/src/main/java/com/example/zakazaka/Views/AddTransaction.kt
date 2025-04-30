@@ -202,9 +202,6 @@ class AddTransaction : AppCompatActivity() {
         }catch(e:Exception){
             Toast.makeText(this,"Error launching camera",Toast.LENGTH_SHORT).show()
         }
-
-
-
     }
     private fun String.toDate(): Date {
         val format = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())

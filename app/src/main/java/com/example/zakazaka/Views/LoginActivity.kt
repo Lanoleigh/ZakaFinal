@@ -70,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
                 val user = loginViewModel.loginUser(email,password)
                 user.observe(this){u ->
                     if(u != null){
-                        Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Login Successful, user: ${u.userID}", Toast.LENGTH_SHORT).show()
 
                         //this sends the user to the how to get started page if they have not completed the tutorial
 
