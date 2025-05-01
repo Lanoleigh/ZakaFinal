@@ -1,7 +1,11 @@
 package com.example.zakazaka.Views
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -11,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.zakazaka.Adapters.SubCategoryAdapter
 import com.example.zakazaka.Data.Database.AppDatabase
+import com.example.zakazaka.Models.SubCategoryEntity
 import com.example.zakazaka.R
 import com.example.zakazaka.Repository.AccountRepository
 import com.example.zakazaka.Repository.BudgetGoalRepository
@@ -67,6 +72,40 @@ class CategoryDetails : AppCompatActivity() {
             subCategoryRecyclerView.adapter = subCategoryAdapter
         }
 
+        //making add subcategory button visible
+        val btnAddSubCategory = findViewById<Button>(R.id.btnAddSubCategory)
+        btnAddSubCategory.setOnClickListener{
+            findViewById<EditText>(R.id.edAddsubCatName).visibility = View.VISIBLE
+            findViewById<EditText>(R.id.edAddsubCatBudget).visibility = View.VISIBLE
+            findViewById<Button>(R.id.btnSaveSubCategory).visibility = View.VISIBLE
+
+        }
+        //saving the sub category to database.
+        val btnSaveSubCategory = findViewById<Button>(R.id.btnSaveSubCategory)
+        btnSaveSubCategory.setOnClickListener {
+            val edAddsubCatName = findViewById<EditText>(R.id.edAddsubCatName)
+            val edAddsubCatBudget = findViewById<EditText>(R.id.edAddsubCatBudget)
+            if(edAddsubCatName.text.isNotEmpty() && edAddsubCatBudget.text.isNotEmpty()){
+                val subcategory = SubCategoryEntity(
+                    name = edAddsubCatName.text.toString(),
+                    budgetLimit = edAddsubCatBudget.text.toString().toDouble(),
+                    currentAmount = 0.0,
+                    description = "",
+                    categoryID = categoryID
+                )
+                subCategoryViewModel.createSubCategory(subcategory).observe(this){ cat ->
+                    if(cat != null){
+                        Toast.makeText(this,"SubCategory Successfull created", Toast.LENGTH_SHORT).show()
+                        edAddsubCatName.text.clear()
+                        edAddsubCatBudget.text.clear()
+                    }
+                }
+            }else{
+                Toast.makeText(this,"Please fill in all fields",Toast.LENGTH_LONG).show()
+            }
+
+
+        }
 
     }
 }

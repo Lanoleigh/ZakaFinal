@@ -11,7 +11,7 @@ class CategoryRepository(private val categoryDao: CategoryDao) {
     // LiveData will automatically update when data changes
     val readAllData: LiveData<List<CategoryEntity>> = categoryDao.readAllData()
 
-    suspend fun getCategoryById(categoryId: Long): CategoryEntity? {
+     fun getCategoryById(categoryId: Long): CategoryEntity? {
         return categoryDao.getCategoryById(categoryId)
     }
 

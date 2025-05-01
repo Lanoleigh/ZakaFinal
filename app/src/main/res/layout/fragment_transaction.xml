@@ -115,12 +115,13 @@
 
                 <!-- View Receipts Button -->
                 <Button
+                    android:id="@+id/btnViewTransactions"
                     android:layout_width="300dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="32dp"
                     android:backgroundTint="@color/primaryColour2"
-                    android:text="View Receipts"
+                    android:text="View Transactions"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
 

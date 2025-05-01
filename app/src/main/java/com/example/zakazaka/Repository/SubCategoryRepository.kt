@@ -15,7 +15,7 @@ class SubCategoryRepository(private val subCategoryDao: SubCategoryDao) {
     }
 
     // Get a specific subcategory by ID
-    suspend fun getSubCategoryById(subCategoryId: Long): SubCategoryEntity? {
+     fun getSubCategoryById(subCategoryId: Long): SubCategoryEntity? {
         return subCategoryDao.getSubCategoryById(subCategoryId)
     }
 

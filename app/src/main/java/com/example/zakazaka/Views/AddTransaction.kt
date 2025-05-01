@@ -64,6 +64,7 @@ class AddTransaction : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        //initialising the viewModelFactory
         val factory = ViewModelFactory(
             UserRepository(AppDatabase.getDatabase(this).userDao()),
             AccountRepository(AppDatabase.getDatabase(this).accountDao()),
@@ -116,6 +117,7 @@ class AddTransaction : AppCompatActivity() {
             }
 
         }
+        //functionality for the calendars
         val btnStartDate = findViewById<Button>(R.id.btnStartDate)
         val btnEndDate = findViewById<Button>(R.id.btnEndDatePicker)
         val startDatePicker = findViewById<DatePicker>(R.id.startDatePicker)
@@ -140,7 +142,7 @@ class AddTransaction : AppCompatActivity() {
             endDatePicker.visibility = View.GONE
         }
 
-        try{
+        try{//functionality for adding a new transaction
             val btnAddTransaction = findViewById<Button>(R.id.btnAddTransaction)
             btnAddTransaction.setOnClickListener {
                 //adding a new transaction
@@ -178,11 +180,9 @@ class AddTransaction : AppCompatActivity() {
                                 Toast.makeText(this@AddTransaction, "Transaction added successfully", Toast.LENGTH_SHORT).show()
                                 subCategoryViewModel.updateSubCategoryCurrentAmount(selectedSubCategory.subCategoryID, amt)
                                 categoryViewModel.updateCategoryCurrentAmount(catId, amt)
-
                                 finish()
                             }else
                                 Toast.makeText(this@AddTransaction,"Error adding transaction",Toast.LENGTH_SHORT).show()
-
                         }
                     }
 
@@ -191,7 +191,7 @@ class AddTransaction : AppCompatActivity() {
         }catch(e:Exception){
             Toast.makeText(this,"Error adding transaction",Toast.LENGTH_SHORT).show()
         }
-        try{
+        try{//to check for permission for the use of the camera
             findViewById<Button>(R.id.btnUpload_receipt).setOnClickListener {
                 if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA),100)

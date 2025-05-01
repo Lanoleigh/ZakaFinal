@@ -40,9 +40,14 @@ class SubCategoryViewModel @Inject constructor(private val repository: SubCatego
         }
     }
     fun updateSubCategoryCurrentAmount(subCategoryID: Long,amount:Double){
+        var newAmount : Double = amount
         //functionality to Update the amount spent in a subcategory, called when a transaction is made
         viewModelScope.launch(Dispatchers.IO){
-            repository.updateSubCategoryAmount(subCategoryID,amount)
+            val subcategory = repository.getSubCategoryById(subCategoryID)
+            if(subcategory != null) {
+                newAmount = subcategory.currentAmount + amount
+            }
+            repository.updateSubCategoryAmount(subCategoryID,newAmount)
         }
     }
     fun transferBetweenCategories(fromCategoryID:Long,toCategoryID:Long,amount:Double){

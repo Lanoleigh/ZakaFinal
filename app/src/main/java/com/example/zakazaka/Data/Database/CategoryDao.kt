@@ -15,7 +15,7 @@ interface CategoryDao {
 
 
     @Query("SELECT * FROM Category WHERE categoryID = :categoryId")
-    suspend fun getCategoryById(categoryId: Long): CategoryEntity?
+    fun getCategoryById(categoryId: Long): CategoryEntity?
 
     //so here we are going to be retrieving the categories created by a specific user.
     @Query("SELECT * FROM Category WHERE userId = :userId")
