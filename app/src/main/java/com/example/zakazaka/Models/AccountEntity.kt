@@ -22,4 +22,8 @@ data class AccountEntity (
     var type : String,
     var bankName : String,
     var userID : Long
-)
+){
+    override fun toString():String{
+        return accountName
+    }
+}

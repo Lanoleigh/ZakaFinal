@@ -26,6 +26,13 @@ class CategoryViewModel @Inject constructor(private val repository: CategoryRepo
         }
         return result
     }
+    fun getCategorybyId(categoryId: Long): LiveData<CategoryEntity?> {
+        val category = MutableLiveData<CategoryEntity>()
+        viewModelScope.launch(Dispatchers.IO) {
+            category.postValue(repository.getCategoryById(categoryId))
+        }
+        return category
+    }
 
     fun deleteCategory(categoryID:Long){
         //functionality to delete a category
@@ -37,13 +44,22 @@ class CategoryViewModel @Inject constructor(private val repository: CategoryRepo
         //functionality to update the limit of a category, normallly when user deposits money from into an account
     }
     fun updateCategoryCurrentAmount(categoryID:Long,amount:Double){
+        var newAmount : Double = amount
         //functionality to Update the amount spent in a category, normally would be called in TransactionViewModel
         viewModelScope.launch(Dispatchers.IO) {
-            repository.updateCategoryCurrentAmount(categoryID, amount)
+            val category = repository.getCategoryById(categoryID)
+            if(category != null)
+                newAmount = category.currentAmount + amount
+            repository.updateCategoryCurrentAmount(categoryID, newAmount)
         }
     }
-    suspend fun getCategoriesByUserId(userId:Long): List<CategoryEntity> {
-        return repository.getCategory(userId)
+     fun getCategoriesByUserId(userId:Long): LiveData<List<CategoryEntity>> {
+        val categories = MutableLiveData<List<CategoryEntity>>()
+        viewModelScope.launch(Dispatchers.IO) {
+            categories.postValue(repository.getCategory(userId))
+        }
+        return categories
+        //return repository.getCategory(userId)
     }
 
 }

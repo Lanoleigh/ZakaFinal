@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".Views.Fragments.CategoryFragment">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF"
@@ -51,197 +50,10 @@
                 android:gravity="center" />
 
             <!-- Category Card -->
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categoryRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical"
-                android:background="@drawable/card_category2"
-                android:elevation="4dp">
-
-                <!-- Green Header with Category and Amount -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/header_green"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:id="@+id/categoryTitle1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expense: Home"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_alignParentStart="true" />
-
-                    <TextView
-                        android:id="@+id/amountLeft1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@id/categoryTitle1"
-                        android:layout_marginBottom="-21dp"
-                        android:text="R200 left of R600"
-                        android:textColor="@color/zakaYellow"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-
-                <!-- Card Body -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="6dp"
-                        android:text="LIMIT STATUS:"
-                        android:textColor="@color/zakaDarkGreen"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <ProgressBar
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="16dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_margin="12dp"
-                        android:progress="60"
-                        android:progressDrawable="@drawable/rounded_progress_bar" />
-
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical"
-                android:background="@drawable/card_category2"
-                android:elevation="4dp">
-
-                <!-- Green Header with Category and Amount -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/header_green"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:id="@+id/categoryTitle2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expense: Home"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_alignParentStart="true" />
-
-                    <TextView
-                        android:id="@+id/amountLeft2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@id/categoryTitle2"
-                        android:layout_marginBottom="-21dp"
-                        android:text="R200 left of R600"
-                        android:textColor="@color/zakaYellow"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-
-                <!-- Card Body -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="6dp"
-                        android:text="LIMIT STATUS:"
-                        android:textColor="@color/zakaDarkGreen"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <ProgressBar
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="16dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_margin="12dp"
-                        android:progress="60"
-                        android:progressDrawable="@drawable/rounded_progress_bar" />
-
-                </LinearLayout>
-            </LinearLayout> <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical"
-            android:background="@drawable/card_category2"
-            android:elevation="4dp">
-
-            <!-- Green Header with Category and Amount -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/header_green"
-                android:padding="16dp">
-
-                <TextView
-                    android:id="@+id/categoryTitle3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Expense: Home"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_alignParentStart="true" />
-
-                <TextView
-                    android:id="@+id/amountLeft3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/categoryTitle3"
-                    android:layout_marginBottom="-21dp"
-                    android:text="R200 left of R600"
-                    android:textColor="@color/zakaYellow"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <!-- Card Body -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="6dp"
-                    android:text="LIMIT STATUS:"
-                    android:textColor="@color/zakaDarkGreen"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <ProgressBar
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="16dp"
-                    android:layout_margin="12dp"
-                    android:layout_marginTop="12dp"
-                    android:progress="60"
-                    android:progressDrawable="@drawable/rounded_progress_bar" />
-
-            </LinearLayout>
-        </LinearLayout>
+                android:layout_height="match_parent" />
             <TextView
                 android:id="@+id/createCategory"
                 android:clickable="true"
@@ -261,6 +73,8 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="@color/zakaDarkGreen" />
+
+
         </LinearLayout>
     </ScrollView>
 

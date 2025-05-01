@@ -27,7 +27,11 @@ class AccountViewModel @Inject constructor(private val repository: AccountReposi
     fun deleteAccount(accountID:Long){
         //functionality to delete account
     }
-    suspend fun getAccountsByUserId(userId:Long): List<AccountEntity> {
-        return repository.getAccountsByUserId(userId)
+     fun getAccountsByUserId(userId:Long): LiveData<List<AccountEntity>> {
+         val accounts = MutableLiveData<List<AccountEntity>>()
+         viewModelScope.launch(Dispatchers.IO) {
+             accounts.postValue(repository.getAccountsByUserId(userId))
+         }
+         return accounts
     }
 }

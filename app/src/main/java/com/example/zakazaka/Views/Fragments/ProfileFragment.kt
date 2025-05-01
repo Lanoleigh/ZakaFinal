@@ -1,60 +1,90 @@
 package com.example.zakazaka.Views.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity.MODE_PRIVATE
+import androidx.lifecycle.ViewModelProvider
+import com.example.zakazaka.Data.Database.AppDatabase
 import com.example.zakazaka.R
+import com.example.zakazaka.Repository.AccountRepository
+import com.example.zakazaka.Repository.BudgetGoalRepository
+import com.example.zakazaka.Repository.CategoryRepository
+import com.example.zakazaka.Repository.SubCategoryRepository
+import com.example.zakazaka.Repository.TransactionRepository
+import com.example.zakazaka.Repository.UserRepository
+import com.example.zakazaka.ViewModels.BudgetGoalViewModel
+import com.example.zakazaka.ViewModels.LoginRegistrationViewModel
+import com.example.zakazaka.ViewModels.ViewModelFactory
+import com.example.zakazaka.Views.AccountActivity
+import com.example.zakazaka.Views.AddAccountActivity
+import com.example.zakazaka.Views.MilestoneActivity
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    lateinit var budgetGoalViewModel: BudgetGoalViewModel
+    lateinit var loginRegistrationViewModel: LoginRegistrationViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user, container, false)
+        val view =  inflater.inflate(R.layout.fragment_user, container, false)
+        val btnAddAcc = view.findViewById<Button>(R.id.btnAddAccountP)
+        btnAddAcc.setOnClickListener {
+            val intent = Intent(activity, AccountActivity::class.java)
+            startActivity(intent)
+        }
+        return view
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val context = requireContext().applicationContext
+        val factory = ViewModelFactory(
+            UserRepository(AppDatabase.getDatabase(context).userDao()),
+            AccountRepository(AppDatabase.getDatabase(context).accountDao()),
+            BudgetGoalRepository(AppDatabase.getDatabase(context).budgetGoalDao()),
+            CategoryRepository(AppDatabase.getDatabase(context).categoryDao()),
+            SubCategoryRepository(AppDatabase.getDatabase(context).subCategoryDao()),
+            TransactionRepository(AppDatabase.getDatabase(context).transactionDao())
+        )
+
+        val sharedPref = requireContext().getSharedPreferences("BudgetAppPrefs", MODE_PRIVATE)
+        val userId = sharedPref.getLong("LOGGED_USER_ID", 0)
+
+        budgetGoalViewModel = ViewModelProvider(this, factory)[BudgetGoalViewModel::class.java]
+        loginRegistrationViewModel = ViewModelProvider(this, factory)[LoginRegistrationViewModel::class.java]
+
+        budgetGoalViewModel.getAllBudgetGoals().observe(viewLifecycleOwner){ budgetGoals ->
+            val latestBudgetGoals = budgetGoals.takeLast(1)
+            latestBudgetGoals.forEach { budgetGoal ->
+                view.findViewById<EditText>(R.id.edMaxBud).setText(budgetGoal.maxAmount.toString())
+                view.findViewById<EditText>(R.id.edMinBud).setText(budgetGoal.minAmount.toString())
+            }
+        }
+        loginRegistrationViewModel.getUserById(userId).observe(viewLifecycleOwner){ user ->
+            if(user!= null){
+                val fullName = user.firstName + " " + user.lastName
+                view.findViewById<EditText>(R.id.user_name).setText("${fullName}")
+                view.findViewById<EditText>(R.id.user_email).setText(user.email)
+            }else{
+                view.findViewById<EditText>(R.id.user_name).setText("User Name")
+                view.findViewById<EditText>(R.id.user_email).setText("Email")
+            }
+        }
+        val btnAddbudGoal = view.findViewById<Button>(R.id.btnAddBudgetGoal)
+        btnAddbudGoal.setOnClickListener {
+            val intent = Intent(activity, MilestoneActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment UserFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

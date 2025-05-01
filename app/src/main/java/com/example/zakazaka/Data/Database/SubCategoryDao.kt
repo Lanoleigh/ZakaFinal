@@ -14,7 +14,7 @@ interface SubCategoryDao {
     suspend fun insert(subCategoryEntity : SubCategoryEntity): Long
 
     @Query("SELECT * FROM Sub_Category WHERE subCategoryID = :subCategoryId")
-    suspend fun getSubCategoryById(subCategoryId: Long): SubCategoryEntity?
+     fun getSubCategoryById(subCategoryId: Long): SubCategoryEntity?
 
     //getting the sub categories for a specific category
     @Query("SELECT * FROM Sub_Category WHERE CategoryID = :categoryId")

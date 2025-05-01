@@ -70,11 +70,11 @@ class LoginActivity : AppCompatActivity() {
                 val user = loginViewModel.loginUser(email,password)
                 user.observe(this){u ->
                     if(u != null){
-                        Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Login Successful, user: ${u.userID}", Toast.LENGTH_SHORT).show()
 
                         //this sends the user to the how to get started page if they have not completed the tutorial
 
-                        howtoViewModel.isHowtoCompleted(u.userID){ completed ->
+                        howtoViewModel.isHowtoCompleted(u.userID, this){ completed ->
                             if(!completed) {
                                 Toast.makeText(this, "Let's get you started", Toast.LENGTH_SHORT).show()
                                 val sharedPref = getSharedPreferences("BudgetAppPrefs", MODE_PRIVATE)
@@ -87,7 +87,6 @@ class LoginActivity : AppCompatActivity() {
                                 startActivity(intent)
                             } else{// if user completed the tutorial they will be sent to the dashboard page
                                 Toast.makeText(this, "Welcome back ${u.firstName}", Toast.LENGTH_SHORT).show()
-
                                 val sharedPref = getSharedPreferences("BudgetAppPrefs", MODE_PRIVATE)
                                 with (sharedPref.edit()) {
                                     putLong("LOGGED_USER_ID", u.userID)

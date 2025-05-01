@@ -25,11 +25,13 @@ import java.util.Date
 data class TransactionEntity (//Reference Module Manual
     @PrimaryKey(autoGenerate = true) val transactionID : Long = 0,
     var date : Date,
+    var endDate : Date,
     var amount : Double,
     var repeat : String,
     var description : String,
     var type : String,
     var currency : String,
     var subCategoryID : Long,
-    var accountID : Long
+    var accountID : Long,
+    var imagePath: String? = null
 )

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".Views.Fragments.HomeFragment">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:background="@drawable/bg_gradient_yellow"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -103,11 +103,12 @@
                 android:layout_marginBottom="16dp" />
 
             <Button
-                android:text="Digital Accounts"
-                android:background="@drawable/border_button"
-                android:textColor="#000000"
+                android:id="@+id/btnDigitalAccount"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primaryColour"
+                android:text="Digital Accounts"
+                android:textColor="#000000" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -119,32 +120,10 @@
                 android:layout_marginBottom="8dp" />
 
             <!-- Transaction Cards (repeatable) -->
-            <TextView
-                android:text="Groceries - (Home)         R150"
-                android:padding="12dp"
-                android:background="@drawable/button_light_yellow"
-                android:layout_marginBottom="8dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recentTransactionRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold" />
-
-            <TextView
-                android:text="Transport - (Utilities)    R52"
-                android:padding="12dp"
-                android:background="@drawable/button_light_yellow"
-                android:layout_marginBottom="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold" />
-
-            <TextView
-                android:text="Eating Out - (Leisure)    R130"
-                android:padding="12dp"
-                android:background="@drawable/button_light_yellow"
-                android:layout_marginBottom="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"/>
+                android:layout_height="match_parent" />
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -152,6 +131,7 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/txtTotalMonthlyBudget"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
@@ -172,6 +152,8 @@
                     android:textAlignment="center"
                     android:textColor="#000000" />
             </LinearLayout>
+
+
 
 
         </LinearLayout>

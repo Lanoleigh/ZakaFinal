@@ -2,6 +2,7 @@ package com.example.zakazaka.ViewModels
 
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.zakazaka.Models.TransactionEntity
@@ -13,10 +14,8 @@ import javax.inject.Inject
 
 class TransactionViewModel @Inject constructor(private val repository: TransactionRepository) : ViewModel() {
     //functionality to register a new transaction
-    fun enterNewTransaction(transaction: TransactionEntity){
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.addTransaction(transaction)
-        }
+    suspend fun enterNewTransaction(transaction: TransactionEntity):Long{
+        return repository.addTransaction(transaction)
     }
     fun getAllTransactions(): LiveData<List<TransactionEntity>> {
         return repository.getAllTransctions
@@ -30,6 +29,13 @@ class TransactionViewModel @Inject constructor(private val repository: Transacti
     fun getTransactionsBetweenDates(startDate: Date, endDate: Date): LiveData<List<TransactionEntity>> {
         return repository.getTransactionsBySelectedPeriod(startDate,endDate)
     }
+    fun getTransactionById(transactionID:Long): LiveData<TransactionEntity> {
+        val transaction = MutableLiveData<TransactionEntity>()
+        viewModelScope.launch(Dispatchers.IO) {
+            transaction.postValue (repository.getTransactionById(transactionID))
+        }
+        return transaction
+    }
     //functionality to return a list of all transactions by a subcategory
     fun getTransactionsBySubCategory(subCategoryID:Long): LiveData<List<TransactionEntity>> {
         return repository.getTransactionsBySubCategory(subCategoryID)
@@ -37,9 +43,6 @@ class TransactionViewModel @Inject constructor(private val repository: Transacti
     //functionality to return a list of all transactions by an account
     fun getTransactionsByAccount(accountID:Long): LiveData<List<TransactionEntity>> {
         return repository.getTransactionsByAccount(accountID)
+    }
 
-    }
-    fun takeImage(transactionID: Long) {
-        //functionality to take image and save it to the transaction
-    }
 }

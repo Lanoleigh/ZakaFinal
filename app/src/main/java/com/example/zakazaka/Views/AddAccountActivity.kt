@@ -51,7 +51,8 @@ class AddAccountActivity : AppCompatActivity() {
             TransactionRepository(AppDatabase.getDatabase(this).transactionDao())
         )
         val accountViewModel = ViewModelProvider(this,factory)[AccountViewModel::class.java]
-        val userId = intent.getLongExtra("USER_ID", -1)
+        val sharedPref = getSharedPreferences("BudgetAppPrefs", MODE_PRIVATE)
+        val userId = sharedPref.getLong("LOGGED_USER_ID", 0)
 
         val btnSaveAcc = findViewById<Button>(R.id.btnSaveAcc)
         btnSaveAcc.setOnClickListener {
@@ -75,7 +76,7 @@ class AddAccountActivity : AppCompatActivity() {
                 newAccId.observe(this){
                     Toast.makeText(this, "Account Created", Toast.LENGTH_SHORT).show()
                 }
-                howtoViewModel.isHowtoCompleted(userId){ completed ->
+                howtoViewModel.isHowtoCompleted(userId,this){ completed ->
                     if(!completed) {//checks if user has completed the tutorial
                         val intent = Intent(this, HowToGetStarted::class.java)
                         intent.putExtra("USER_ID", userId)
