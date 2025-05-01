@@ -26,6 +26,7 @@ import com.example.zakazaka.ViewModels.TransactionViewModel
 import com.example.zakazaka.ViewModels.ViewModelFactory
 import com.example.zakazaka.Views.AddTransaction
 import com.example.zakazaka.Views.CategoryDetails
+import com.example.zakazaka.Views.ViewAllTransaction
 
 
 class TransactionFragment : Fragment() {
@@ -73,6 +74,12 @@ class TransactionFragment : Fragment() {
             transactionRecyclerView.adapter = transactionAdapter
 
         }
+        val btnViewAllTransactions = view.findViewById<Button>(R.id.btnViewTransactions)
+        btnViewAllTransactions.setOnClickListener{
+            val intent = Intent(requireContext(), ViewAllTransaction::class.java)
+            startActivity(intent)
+        }
+
 
 
     }

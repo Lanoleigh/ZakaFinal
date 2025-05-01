@@ -1,15 +1,14 @@
 package com.example.zakazaka.Views
 
-import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.zakazaka.Adapters.TransactionAdapter
 import com.example.zakazaka.Data.Database.AppDatabase
 import com.example.zakazaka.R
 import com.example.zakazaka.Repository.AccountRepository
@@ -18,18 +17,19 @@ import com.example.zakazaka.Repository.CategoryRepository
 import com.example.zakazaka.Repository.SubCategoryRepository
 import com.example.zakazaka.Repository.TransactionRepository
 import com.example.zakazaka.Repository.UserRepository
+import com.example.zakazaka.ViewModels.CategoryViewModel
+import com.example.zakazaka.ViewModels.SubCategoryViewModel
 import com.example.zakazaka.ViewModels.TransactionViewModel
 import com.example.zakazaka.ViewModels.ViewModelFactory
 
-class ViewAllTransaction : AppCompatActivity() {
-    lateinit var transactionAdapter : TransactionAdapter
+class TransactionDetails : AppCompatActivity() {
     lateinit var transactionViewModel : TransactionViewModel
-    lateinit var transRecyclerView : RecyclerView
-
+    lateinit var subCategoryViewModel : SubCategoryViewModel
+    lateinit var categoryViewModel : CategoryViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_view_all_transaction)
+        setContentView(R.layout.activity_transaction_details)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -43,23 +43,30 @@ class ViewAllTransaction : AppCompatActivity() {
             SubCategoryRepository(AppDatabase.getDatabase(this).subCategoryDao()),
             TransactionRepository(AppDatabase.getDatabase(this).transactionDao())
         )
-
-        val sharedPref = getSharedPreferences("BudgetAppPrefs", MODE_PRIVATE)
-        val userId = sharedPref.getLong("LOGGED_USER_ID", 0)
+        val transactionId = intent.getLongExtra("TRANSACTION_ID", -1)
         transactionViewModel = ViewModelProvider(this,factory)[TransactionViewModel::class.java]
-        transRecyclerView = findViewById(R.id.transactionsRecyclerView)
-        transRecyclerView.layoutManager = LinearLayoutManager(this)
-
-        transactionViewModel.getAllTransactions().observe(this){transactions ->
-                transactionAdapter = TransactionAdapter(transactions){ transaction ->
-                    val transactionId = transaction.transactionID
-                    val intent = Intent(this, TransactionDetails::class.java)
-                    intent.putExtra("TRANSACTION_ID", transactionId)
-                    startActivity(intent)
-                    //when the user clicks on a specific transaction they will be sent to a different page to view that transaction
-                }
-                transRecyclerView.adapter = transactionAdapter
+        subCategoryViewModel = ViewModelProvider(this,factory)[SubCategoryViewModel::class.java]
+        categoryViewModel = ViewModelProvider(this,factory)[CategoryViewModel::class.java]
+        var categoryString :String = ""
+        transactionViewModel.getTransactionById(transactionId).observe(this){ transaction->
+            findViewById<TextView>(R.id.txtTransDescription).text = transaction.description
+            findViewById<TextView>(R.id.txtTransAmount).text = transaction.amount.toString()
+            findViewById<TextView>(R.id.txtDateOfTransaction).text = transaction.date.toString()
+            findViewById<TextView>(R.id.txtType).text = transaction.type
+           subCategoryViewModel.getSubCategorybyId(transaction.subCategoryID).observe(this){subCategory->
+               val subCatName = subCategory.name
+               val catId = subCategory.categoryID
+               categoryViewModel.getCategorybyId(catId).observe(this){category->
+                   if(category != null)
+                    categoryString = "${category.name} -> ${subCatName}"
+               }
+           }
+            findViewById<TextView>(R.id.txtCategory).text = categoryString
+            findViewById<TextView>(R.id.txtRecurring).text = transaction.repeat
+            if(transaction.imagePath != null){
+                findViewById<ImageView>(R.id.imgReceipt).setImageURI(Uri.parse(transaction.imagePath))
             }
+        }
 
     }
 }

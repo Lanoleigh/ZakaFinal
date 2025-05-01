@@ -39,6 +39,13 @@ class SubCategoryViewModel @Inject constructor(private val repository: SubCatego
             repository.updateSubCategoryBudgetLimit(subCategoryID, newLimit)
         }
     }
+    fun getSubCategorybyId(subCategoryID:Long):LiveData<SubCategoryEntity>{
+        val subcategory = MutableLiveData<SubCategoryEntity>()
+        viewModelScope.launch(Dispatchers.IO){
+            subcategory.postValue(repository.getSubCategoryById(subCategoryID))
+        }
+        return subcategory
+    }
     fun updateSubCategoryCurrentAmount(subCategoryID: Long,amount:Double){
         var newAmount : Double = amount
         //functionality to Update the amount spent in a subcategory, called when a transaction is made
