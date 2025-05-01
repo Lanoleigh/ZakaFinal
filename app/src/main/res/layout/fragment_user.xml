@@ -75,14 +75,14 @@
 
             <!-- Budget Goal -->
             <TextView
-                android:text="Budget Goal"
-                android:textColor="@android:color/white"
-                android:layout_marginTop="24dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Maximum budget"
+                android:textColor="@android:color/white" />
 
             <EditText
-                android:id="@+id/budget_goal"
+                android:id="@+id/edMaxBud"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext_bg"
@@ -92,14 +92,14 @@
 
             <!-- Savings Goal -->
             <TextView
-                android:text="Savings Goal"
-                android:textColor="@android:color/white"
-                android:layout_marginTop="12dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Minimum Budget"
+                android:textColor="@android:color/white" />
 
             <EditText
-                android:id="@+id/savings_goal"
+                android:id="@+id/edMinBud"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext_bg"
@@ -133,12 +133,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@color/accentColour2"
-                android:backgroundTint="@color/accentColour2"
+                android:backgroundTint="@color/primaryColour"
                 android:drawableStart="@drawable/ic_lock"
                 android:text="Add Account"
                 android:textColor="@android:color/white" />
-
+            <Button
+                android:id="@+id/btnAddBudgetGoal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/primaryColour"
+                android:drawableStart="@drawable/ic_lock"
+                android:text="Add New Budget Goal"
+                android:textColor="@android:color/white" />
             <!-- Total Expenses Summary -->
             <TextView
                 android:text="Total Expenses"

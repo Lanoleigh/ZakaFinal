@@ -2,8 +2,10 @@ package com.example.zakazaka.Views
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -53,15 +55,23 @@ class MilestoneActivity : AppCompatActivity() {
         )
 
         val budgetGoalViewModel = ViewModelProvider(this,factory)[BudgetGoalViewModel::class.java]
-
+        val month = LocalDate.now().month.getDisplayName(TextStyle.FULL, Locale.getDefault())
         val sharedPref = getSharedPreferences("BudgetAppPrefs", MODE_PRIVATE)
         val userId = sharedPref.getLong("LOGGED_USER_ID", 0)
 
+        budgetGoalViewModel.getAllBudgetGoals().observe(this) { budgetGoals ->
+            val latestBudgetGoals = budgetGoals.takeLast(1)
+            latestBudgetGoals.forEach { budgetGoal ->
+                if(budgetGoal.month == month){
+                    findViewById<TextView>(R.id.txtWarning).visibility = View.VISIBLE
+                }
+            }
+        }
         val btnSaveGoal = findViewById<Button>(R.id.btnSaveBudgetGoal)
         btnSaveGoal.setOnClickListener {
             val minimumBudget = findViewById<EditText>(R.id.edMinimumBudget).text.toString()
             val maximumBudget = findViewById<EditText>(R.id.budgetGoalInput).text.toString()
-            val month = LocalDate.now().month.getDisplayName(TextStyle.FULL, Locale.getDefault())
+
             if(maximumBudget.isNotEmpty() && minimumBudget.isNotEmpty()){
                 val budgetGoal = BudgetGoalEntity(
                     minAmount = minimumBudget.toDouble(),

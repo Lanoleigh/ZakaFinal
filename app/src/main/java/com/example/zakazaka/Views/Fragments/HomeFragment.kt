@@ -1,10 +1,12 @@
 package com.example.zakazaka.Views.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -23,6 +25,7 @@ import com.example.zakazaka.Repository.UserRepository
 import com.example.zakazaka.ViewModels.BudgetGoalViewModel
 import com.example.zakazaka.ViewModels.TransactionViewModel
 import com.example.zakazaka.ViewModels.ViewModelFactory
+import com.example.zakazaka.Views.AccountActivity
 
 class HomeFragment : Fragment() {
     private lateinit var recentTransactionRecyclerView: RecyclerView
@@ -66,11 +69,17 @@ class HomeFragment : Fragment() {
        }
 
         budgetGoalViewModel.getAllBudgetGoals().observe(viewLifecycleOwner) { budgetGoals ->
-            val latestBudgetGoals = budgetGoals.take(1)
+            val latestBudgetGoals = budgetGoals.takeLast(1)
             latestBudgetGoals.forEach { budgetGoal ->
                 view.findViewById<TextView>(R.id.txtTotalMonthlyBudget).text = "Total Monthly Budget R${budgetGoal.maxAmount.toString()}"
             }
         }
+        val btnDigitalAccount = view.findViewById<Button>(R.id.btnDigitalAccount)
+        btnDigitalAccount.setOnClickListener {
+            val intent = Intent(activity, AccountActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
 

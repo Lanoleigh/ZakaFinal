@@ -228,6 +228,16 @@
                     android:textColor="#888888"
                     android:textStyle="italic" />
             </LinearLayout>
+            <TextView
+                android:id="@+id/txtWarning"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:padding="10dp"
+                android:background="@color/secondaryColour"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="You already have a budget Goal for this month setting a new one would replace it."
+                />
 
             <!-- Set Budget Goal Section -->
             <LinearLayout
