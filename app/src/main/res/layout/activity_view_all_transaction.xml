@@ -44,8 +44,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/edittext_bg"
-            android:clickable="true"
-            android:focusable="false"
             android:hint="Start Date"
             android:padding="12dp"
             android:textColor="#000" />
@@ -61,8 +59,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/edittext_bg"
-            android:clickable="true"
-            android:focusable="false"
             android:hint="End Date"
             android:padding="12dp"
             android:textColor="#000" />
@@ -89,7 +85,6 @@
             android:textColor="#888888"
             android:textSize="12sp" />
     </LinearLayout>
-
 
     <Button
         android:id="@+id/sortButton"
@@ -119,10 +114,5 @@
         android:clipToPadding="false"
         android:overScrollMode="never" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>

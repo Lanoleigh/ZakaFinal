@@ -2,6 +2,9 @@ package com.example.zakazaka.Views
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -20,6 +23,8 @@ import com.example.zakazaka.Repository.TransactionRepository
 import com.example.zakazaka.Repository.UserRepository
 import com.example.zakazaka.ViewModels.TransactionViewModel
 import com.example.zakazaka.ViewModels.ViewModelFactory
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ViewAllTransaction : AppCompatActivity() {
     lateinit var transactionAdapter : TransactionAdapter
@@ -59,7 +64,34 @@ class ViewAllTransaction : AppCompatActivity() {
                     //when the user clicks on a specific transaction they will be sent to a different page to view that transaction
                 }
                 transRecyclerView.adapter = transactionAdapter
+        }
+        val btnSort = findViewById<Button>(R.id.sortButton)
+
+        btnSort.setOnClickListener{
+            val startDate = findViewById<EditText>(R.id.startDate).text.toString()
+            val endDate = findViewById<EditText>(R.id.endDate).text.toString()
+            if(startDate.isEmpty() || endDate.isEmpty()){
+                Toast.makeText(this,"Please fill in all fields", Toast.LENGTH_LONG).show()
+            }else{
+                val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                format.isLenient = false
+                try {
+                    val start = format.parse(startDate)
+                    val end = format.parse(endDate)
+                    if (start != null && end != null) {
+                        transactionViewModel.getTransactionsBetweenDates(start,end).observe(this){ filteredTransactions ->
+                            transactionAdapter = TransactionAdapter(filteredTransactions){}
+                            transRecyclerView.adapter = transactionAdapter
+                        }
+                    }
+
+                }catch(e:Exception)
+                {//if the user enters an invalid date format they will be notified
+                    Toast.makeText(this,"Invalid date format", Toast.LENGTH_LONG).show()
+                }
             }
+        }
+
 
     }
 }
