@@ -68,34 +68,34 @@
                         <Button
                             android:layout_width="0dp"
                             android:layout_height="70dp"
+                            android:layout_marginEnd="8dp"
                             android:layout_weight="1"
-                            android:text="+ Income"
-                            android:textColor="#000000"
-                            android:background="@drawable/square_light_yellow"
+                            android:backgroundTint="@color/primaryColour"
                             android:elevation="6dp"
-                            android:layout_marginEnd="8dp" />
+                            android:text="+ Income"
+                            android:textColor="#000000" />
 
                         <!-- Expense -->
                         <Button
                             android:layout_width="0dp"
                             android:layout_height="70dp"
+                            android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="✂ Expense"
-                            android:textColor="#000000"
-                            android:background="@drawable/square_light_yellow"
+                            android:backgroundTint="@color/primaryColour"
                             android:elevation="6dp"
-                            android:layout_marginStart="8dp" />
+                            android:text="✂ Expense"
+                            android:textColor="#000000" />
                     </LinearLayout>
 
                     <!-- Transfer (separate row) -->
                     <Button
                         android:layout_width="200dp"
                         android:layout_height="70dp"
-                        android:text="⇄ Transfer"
-                        android:textColor="#000000"
-                        android:background="@drawable/square_light_yellow"
+                        android:layout_gravity="center_horizontal"
+                        android:backgroundTint="@color/primaryColour"
                         android:elevation="6dp"
-                        android:layout_gravity="center_horizontal" />
+                        android:text="⇄ Transfer"
+                        android:textColor="#000000" />
                 </LinearLayout>
 
                 <!-- Recent Transactions -->
@@ -108,66 +108,21 @@
                     android:textStyle="bold"
                     android:layout_marginTop="32dp" />
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recentTransRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <!-- Transaction item example -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginTop="12dp"
-                        android:padding="8dp">
-
-
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:paddingStart="12dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Transaction 1"
-                                android:textColor="#333333"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Amount: R100"
-                                android:textColor="#777777"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="01/01/2023"
-                            android:textColor="#777777"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <!-- Duplicate the above layout for more transactions -->
-                </LinearLayout>
+                    android:layout_height="match_parent" />
 
                 <!-- View Receipts Button -->
                 <Button
                     android:layout_width="300dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="32dp"
+                    android:backgroundTint="@color/primaryColour2"
                     android:text="View Receipts"
-                    android:background="@drawable/balance_card"
-                    android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:layout_marginTop="32dp" />
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
 
                 <!-- Recently Uploaded Receipts -->
                 <TextView
@@ -238,10 +193,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:background="@drawable/button_dark_green"
+                    android:backgroundTint="@color/primaryColour2"
                     android:text="Add New Transaction"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold" />
+
+
 
             </LinearLayout>
 

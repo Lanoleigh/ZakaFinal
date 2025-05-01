@@ -53,7 +53,7 @@ class AddTransaction : AppCompatActivity() {
     lateinit var categoryViewModel: CategoryViewModel
     lateinit var subCategoryViewModel: SubCategoryViewModel
     lateinit var accountViewModel: AccountViewModel
-
+    private var catId :Long = 0
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -101,7 +101,7 @@ class AddTransaction : AppCompatActivity() {
                 override fun onItemSelected(parent: AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
                     val selectedCategory = categories[position]
                     val categoryId = selectedCategory.categoryID
-
+                    catId = categoryId
                     subCategoryViewModel.getSubCategoriesForCategory(categoryId).observe(this@AddTransaction){ subCategories ->
 
                         val subAdapter = ArrayAdapter(this@AddTransaction,android.R.layout.simple_spinner_item,subCategories)
@@ -177,7 +177,8 @@ class AddTransaction : AppCompatActivity() {
                             if(transId > 0) {
                                 Toast.makeText(this@AddTransaction, "Transaction added successfully", Toast.LENGTH_SHORT).show()
                                 subCategoryViewModel.updateSubCategoryCurrentAmount(selectedSubCategory.subCategoryID, amt)
-                                //categoryViewModel.updateCategoryCurrentAmount() update the CategoryCurrent Amount
+                                categoryViewModel.updateCategoryCurrentAmount(catId, amt)
+
                                 finish()
                             }else
                                 Toast.makeText(this@AddTransaction,"Error adding transaction",Toast.LENGTH_SHORT).show()

@@ -26,6 +26,13 @@ class CategoryViewModel @Inject constructor(private val repository: CategoryRepo
         }
         return result
     }
+    fun getCategorybyId(categoryId: Long): LiveData<CategoryEntity?> {
+        val category = MutableLiveData<CategoryEntity>()
+        viewModelScope.launch(Dispatchers.IO) {
+            category.postValue(repository.getCategoryById(categoryId))
+        }
+        return category
+    }
 
     fun deleteCategory(categoryID:Long){
         //functionality to delete a category

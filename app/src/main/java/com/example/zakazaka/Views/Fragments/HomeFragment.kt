@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
         recentTransactionRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
        transactionViewModel.getAllTransactions().observe(viewLifecycleOwner) { transactions ->
-           val latestTransactions = transactions.takeLast(2)
+           val latestTransactions = transactions.sortedByDescending { it.date }.take(3)
            transactionAdpater = TransactionAdapter(latestTransactions){ transaction ->
                Toast.makeText(requireContext(), "Clicked on ${transaction.description}", Toast.LENGTH_SHORT).show()
            }
