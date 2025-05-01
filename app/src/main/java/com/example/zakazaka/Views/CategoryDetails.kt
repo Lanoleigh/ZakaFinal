@@ -25,13 +25,17 @@ import com.example.zakazaka.Repository.TransactionRepository
 import com.example.zakazaka.Repository.UserRepository
 import com.example.zakazaka.ViewModels.CategoryViewModel
 import com.example.zakazaka.ViewModels.SubCategoryViewModel
+import com.example.zakazaka.ViewModels.TransactionViewModel
 import com.example.zakazaka.ViewModels.ViewModelFactory
+import java.util.Locale
+import java.text.SimpleDateFormat
 
 class CategoryDetails : AppCompatActivity() {
     lateinit var subCategoryRecyclerView : RecyclerView
     lateinit var subCategoryAdapter : SubCategoryAdapter
     lateinit var categoryViewModel : CategoryViewModel
     lateinit var subCategoryViewModel : SubCategoryViewModel
+    lateinit var transactionViewMode : TransactionViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -103,8 +107,38 @@ class CategoryDetails : AppCompatActivity() {
             }else{
                 Toast.makeText(this,"Please fill in all fields",Toast.LENGTH_LONG).show()
             }
+        }
+        transactionViewMode = ViewModelProvider(this,factory)[TransactionViewModel::class.java]
 
-
+        var outputText :String = ""
+        var categoryAmt :Double = 0.0
+        val btnCheckAmtBetweenDates = findViewById<Button>(R.id.btnCheckAmtBetweenDates)
+        btnCheckAmtBetweenDates.setOnClickListener {
+            findViewById<TextView>(R.id.txtOutput).visibility = View.VISIBLE
+            val startDate = findViewById<EditText>(R.id.edStart).text.toString()
+            val endDate = findViewById<EditText>(R.id.edEnd).text.toString()
+            if(startDate.isEmpty() || endDate.isEmpty()){
+                Toast.makeText(this,"Please fill in all fields", Toast.LENGTH_LONG).show()
+            }else{
+                val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                format.isLenient = false
+                try{
+                    val start = format.parse(startDate)
+                    val end = format.parse(endDate)
+                    if(start != null && end != null) {
+                        subCategoryViewModel.getSubCategoriesForCategory(categoryID).observe(this){subcategories ->
+                            val subcats = subcategories.map{it.subCategoryID}
+                            transactionViewMode.getTransactionsBetweenDates(start,end).observe(this){transactions->
+                                val filteredTrans = transactions.filter { it.subCategoryID in subcats }
+                                categoryAmt = filteredTrans.sumOf { it.amount }
+                                findViewById<TextView>(R.id.txtOutput).text = "You've spent R${categoryAmt} in this category"
+                            }
+                        }
+                    }
+                }catch(e:Exception){
+                    Toast.makeText(this,"Please enter correct date format: dd/MM/yyyy",Toast.LENGTH_LONG).show()
+                }
+            }
         }
 
     }

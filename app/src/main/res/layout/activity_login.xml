@@ -118,7 +118,9 @@
                 android:layout_height="match_parent"
 
                 android:backgroundTint="@color/primaryColour2"
-                android:text="login" />
+                android:text="login"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
             <!-- or divider -->
             <TextView

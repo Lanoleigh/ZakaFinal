@@ -133,6 +133,8 @@
                 android:text="Save SubCategory"
                 android:backgroundTint="@color/primaryColour"
                 />
+
+
             <TextView
                 android:id="@+id/txtRemainingBalance"
                 android:layout_width="match_parent"
@@ -144,6 +146,58 @@
                 android:text="Remaining Balance : R40"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtUserSpendHeading"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:text="How much have you spent in this category?"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp">
+
+                <EditText
+                    android:id="@+id/edStart"
+                    android:layout_width="150dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Start Date(dd/MM/yyyy)"
+                    android:textSize="12sp" />
+                <TextView
+                    android:text="To"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:id="@+id/edEnd"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:hint="End Date(dd/MM/yyyy)"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <Button
+                android:id="@+id/btnCheckAmtBetweenDates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/primaryColour"
+                android:text="Check"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/txtOutput"
+                android:padding="10dp"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/zakaDarkGreen"
+                />
 
             <!-- Bottom Buttons -->
             <LinearLayout

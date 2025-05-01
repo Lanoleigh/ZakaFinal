@@ -80,7 +80,12 @@ class ViewAllTransaction : AppCompatActivity() {
                     val end = format.parse(endDate)
                     if (start != null && end != null) {
                         transactionViewModel.getTransactionsBetweenDates(start,end).observe(this){ filteredTransactions ->
-                            transactionAdapter = TransactionAdapter(filteredTransactions){}
+                            transactionAdapter = TransactionAdapter(filteredTransactions){
+                                val transactionId = it.transactionID
+                                val intent = Intent(this, TransactionDetails::class.java)
+                                intent.putExtra("TRANSACTION_ID", transactionId)
+                                startActivity(intent)
+                            }
                             transRecyclerView.adapter = transactionAdapter
                         }
                     }
