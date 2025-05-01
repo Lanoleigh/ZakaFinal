@@ -1,13 +1,19 @@
 package com.example.zakazaka.Repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.zakazaka.Data.Database.CategoryDao
+import com.example.zakazaka.Data.Database.SubCategoryDao
 import com.example.zakazaka.Data.Database.TransactionDao
 import com.example.zakazaka.Models.TransactionEntity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.util.Date
+import javax.inject.Inject
 
-class TransactionRepository(private val transactionDao: TransactionDao) {
+class TransactionRepository(private val transactionDao: TransactionDao)  {
 
-    // getting all the live transactions
+    //get all transactions for specific user.
     val getAllTransctions: LiveData<List<TransactionEntity>> = transactionDao.getAllTransactions()
 
     //getting transaction by id
@@ -30,15 +36,15 @@ class TransactionRepository(private val transactionDao: TransactionDao) {
         return transactionDao.getTransactionsByAccount(accountId)
     }
 
-    //get transaction by type
-    fun getTransactionsByType(type: String): LiveData<List<TransactionEntity>> {
-        return transactionDao.getTransactionsByType(type)
-    }
-
-    //get transaction by date and subcategory
-    fun getTransactionsByDateRangeAndSubCategory(startDate: Date, endDate: Date, subCategoryId: Long): LiveData<List<TransactionEntity>> {
-        return transactionDao.getTransactionsByDateAndSubCategory(startDate, endDate, subCategoryId)
-    }
+//    //get transaction by type
+//    fun getTransactionsByType(type: String): LiveData<List<TransactionEntity>> {
+//        return transactionDao.getTransactionsByType(type)
+//    }
+//
+//    //get transaction by date and subcategory
+//    fun getTransactionsByDateRangeAndSubCategory(startDate: Date, endDate: Date, subCategoryId: Long): LiveData<List<TransactionEntity>> {
+//        return transactionDao.getTransactionsByDateAndSubCategory(startDate, endDate, subCategoryId)
+//    }
 
     /*get by date and account
     fun getTransactionsByDateRangeAndAccount(startDate: Date, endDate: Date, accountId: Long): LiveData<List<TransactionEntity>> {
@@ -64,8 +70,5 @@ class TransactionRepository(private val transactionDao: TransactionDao) {
     suspend fun deleteAllTransactions() {
         transactionDao.deleteAllTransactions()
     }
-
-
-
 
 }

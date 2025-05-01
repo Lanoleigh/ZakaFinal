@@ -24,13 +24,14 @@ class ViewModelFactory(
                BudgetGoalViewModel(budgetGoalRepository) as T
 //
             modelClass.isAssignableFrom(CategoryViewModel::class.java) ->
-                CategoryViewModel(categoryRepository) as T
+                CategoryViewModel(categoryRepository, subCategoryRepository) as T
 //
             modelClass.isAssignableFrom(SubCategoryViewModel::class.java) ->
                 SubCategoryViewModel(subCategoryRepository) as T
 //
             modelClass.isAssignableFrom(TransactionViewModel::class.java) ->
                TransactionViewModel(transactionRepository) as T
+
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }

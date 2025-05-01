@@ -160,14 +160,15 @@
 
                 <!-- View Receipts Button -->
                 <Button
+                    android:id="@+id/btnView"
                     android:layout_width="300dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
-                    android:text="View Receipts"
+                    android:layout_marginTop="32dp"
                     android:background="@drawable/balance_card"
+                    android:text="View Receipts"
                     android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:layout_marginTop="32dp" />
+                    android:textStyle="bold" />
 
                 <!-- Recently Uploaded Receipts -->
                 <TextView
