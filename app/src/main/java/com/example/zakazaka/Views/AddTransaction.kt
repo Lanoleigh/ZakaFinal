@@ -217,7 +217,9 @@ class AddTransaction : AppCompatActivity() {
 
     }
     private fun launchCamera(){
-        val photo = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "photo.jpg")
+        val timeStamp = SimpleDateFormat("yyyyMM_HHmmss",Locale.getDefault()).format(Date())
+        val fileName = "photo_$timeStamp.jpg"
+        val photo = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), fileName)
         val uri = FileProvider.getUriForFile(this, "$packageName.provider", photo)
         imageUri = uri
         takePictureLauncher.launch(uri)
