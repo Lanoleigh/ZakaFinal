@@ -6,9 +6,9 @@ real-time analytics, and gamified goal setting. Built as part of the PROG7313 pr
 ## 📱 Features
 
 - **User Registration and Login**
-- **Expense Tracking** with receipt image uploads
+- **Expense Tracking with receipt image uploads**
 - **Customizable Categories and Sub-categories**
-- **Financial Goals & Milestones** with gamification
+- **Financial Goals & Milestones with gamification**
 - **Multiple Financial Accounts**
 - **Scheduled Monthly Payments**
 - **Transfers between Accounts or Categories**
