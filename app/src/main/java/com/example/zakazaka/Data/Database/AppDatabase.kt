@@ -50,7 +50,7 @@ abstract class AppDatabase : RoomDatabase() {
                 instance
             }
         }
-    }
+    } //(The IIE, 2025)
     class Converters {
         @TypeConverter
         fun TimestampToDate(value: Long?): java.util.Date? {

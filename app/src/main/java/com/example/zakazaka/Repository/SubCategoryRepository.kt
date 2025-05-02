@@ -7,7 +7,7 @@ import com.example.zakazaka.Models.SubCategoryEntity
 class SubCategoryRepository(private val subCategoryDao: SubCategoryDao) {
 
     // Get all subcategories as LiveData
-    val readAllData: LiveData<List<SubCategoryEntity>> = subCategoryDao.readAllData()
+    val readAllData: LiveData<List<SubCategoryEntity>> = subCategoryDao.readAllData() //(Android Developer, 2025)
 
     // Insert a new subcategory
     suspend fun addSubCategory(subCategory: SubCategoryEntity): Long {
