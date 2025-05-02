@@ -21,7 +21,7 @@ class AccountViewModel @Inject constructor(private val repository: AccountReposi
          return accNo
     }
     fun getAccounts(): LiveData<List<AccountEntity>> {
-        //functionality to get all the accountss
+        //functionality to get all the accounts
         return repository.getAllAccount
     }
     fun deleteAccount(accountID:Long){
