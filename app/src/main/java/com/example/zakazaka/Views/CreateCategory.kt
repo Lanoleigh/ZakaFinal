@@ -98,8 +98,6 @@ class CreateCategory : AppCompatActivity() {
         }
     }
 
-        // Optional: Display user ID for debugging
-        // Toast.makeText(this, "User ID: $userId", Toast.LENGTH_SHORT).show()
 
 
     private fun setupCategoryCreation(categoryName:String, budgetLimit:Double) {
