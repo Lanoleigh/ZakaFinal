@@ -47,7 +47,7 @@ class CreateCategory : AppCompatActivity() {
 
         // Retrieve the user ID from SharedPreferences
         val sharedPref = getSharedPreferences("BudgetAppPrefs", MODE_PRIVATE)
-        userId = sharedPref.getLong("LOGGED_USER_ID", 0)
+        userId = sharedPref.getLong("LOGGED_USER_ID", 0) //(Android Developer, 2025)
 
         //initalizes the HowToView viewModel
         val howtoViewModel = HowToViewModel()
