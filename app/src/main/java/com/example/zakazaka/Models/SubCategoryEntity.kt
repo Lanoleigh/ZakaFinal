@@ -15,7 +15,7 @@ import androidx.room.PrimaryKey
     ],
 
     indices = [Index(value = ["categoryID"])]
-)
+)//(Tonnie, 2024)
 data class SubCategoryEntity (//Reference Module Manual
     @PrimaryKey(autoGenerate = true) val subCategoryID : Long = 0,
     var name : String,
