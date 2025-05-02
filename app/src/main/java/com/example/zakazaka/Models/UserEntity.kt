@@ -12,4 +12,4 @@ data class UserEntity (
     var lastName : String,
     var email : String,
     var password : String
-)
+)//(Adhiguna, 2021)
