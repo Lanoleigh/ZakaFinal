@@ -58,7 +58,7 @@ class MilestoneActivity : AppCompatActivity() {
         val month = LocalDate.now().month.getDisplayName(TextStyle.FULL, Locale.getDefault())
         val sharedPref = getSharedPreferences("BudgetAppPrefs", MODE_PRIVATE)
         val userId = sharedPref.getLong("LOGGED_USER_ID", 0)
-
+        //checking if the user already has a budget goal for the current month
         budgetGoalViewModel.getAllBudgetGoals().observe(this) { budgetGoals ->
             val latestBudgetGoals = budgetGoals.takeLast(1)
             latestBudgetGoals.forEach { budgetGoal ->

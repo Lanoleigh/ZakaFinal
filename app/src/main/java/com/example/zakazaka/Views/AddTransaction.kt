@@ -73,6 +73,7 @@ class AddTransaction : AppCompatActivity() {
             SubCategoryRepository(AppDatabase.getDatabase(this).subCategoryDao()),
             TransactionRepository(AppDatabase.getDatabase(this).transactionDao())
         )
+        //getting user  ID
         val sharedPref = getSharedPreferences("BudgetAppPrefs", MODE_PRIVATE)
         val userId = sharedPref.getLong("LOGGED_USER_ID", 0)
         //initializing the ViewModels
@@ -85,6 +86,7 @@ class AddTransaction : AppCompatActivity() {
         val sCategorySpinner = findViewById<Spinner>(R.id.sCategorySpinner)
         val sSubCategorySpinner = findViewById<Spinner>(R.id.sSubCategorySpinner)
         //adding values to the spinners based of the users ID
+        //this code was adapted from : https://stackoverflow.com/questions/62350236/how-to-use-an-arrayadapter-with-spinner-kotlin
         accountViewModel.getAccountsByUserId(userId).observe(this){ accounts ->
             val accNames = accounts.map { it.accountName }
             val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, accounts)
@@ -218,7 +220,7 @@ class AddTransaction : AppCompatActivity() {
         }
 
     }
-    //reference this
+    //this code below was adapted from: https://stackoverflow.com/questions/46127064/capture-and-save-image-with-kotlin-in-android-studio
     private fun launchCamera(){
         val timeStamp = SimpleDateFormat("yyyyMM_HHmmss",Locale.getDefault()).format(Date())
         val fileName = "photo_$timeStamp.jpg"
@@ -237,5 +239,8 @@ class AddTransaction : AppCompatActivity() {
     }
 }
 /*
-* Colocho, S. (2017). Capture and save image with Kotlin in Android Studio. [online] Stack Overflow. Available at: https://stackoverflow.com/questions/46127064/capture-and-save-image-with-kotlin-in-android-studio.
+* Colocho, S. (2017). Capture and save image with Kotlin in Android Studio. [online] Stack Overflow. Available at: https://stackoverflow.com/questions/46127064/capture-and-save-image-with-kotlin-in-android-studio [Accessed 25 Apr. 2025].
+*
+* Stakeoverflow. (2020). How to use an ArrayAdapter with Spinner Kotlin. [online] Available at: https://stackoverflow.com/questions/62350236/how-to-use-an-arrayadapter-with-spinner-kotlin [Accessed 27 Apr. 2025].
+*
 * */

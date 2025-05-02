@@ -40,6 +40,7 @@ class ViewAllTransaction : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        //initalise ViewModel Factory
         val factory = ViewModelFactory(
             UserRepository(AppDatabase.getDatabase(this).userDao()),
             AccountRepository(AppDatabase.getDatabase(this).accountDao()),
@@ -48,13 +49,13 @@ class ViewAllTransaction : AppCompatActivity() {
             SubCategoryRepository(AppDatabase.getDatabase(this).subCategoryDao()),
             TransactionRepository(AppDatabase.getDatabase(this).transactionDao())
         )
-
+        //gettinf user id
         val sharedPref = getSharedPreferences("BudgetAppPrefs", MODE_PRIVATE)
         val userId = sharedPref.getLong("LOGGED_USER_ID", 0)
         transactionViewModel = ViewModelProvider(this,factory)[TransactionViewModel::class.java]
         transRecyclerView = findViewById(R.id.transactionsRecyclerView)
         transRecyclerView.layoutManager = LinearLayoutManager(this)
-
+        //get all transactions and display them using an adapter and recycler view
         transactionViewModel.getAllTransactions().observe(this){transactions ->
                 transactionAdapter = TransactionAdapter(transactions){ transaction ->
                     val transactionId = transaction.transactionID
@@ -65,6 +66,8 @@ class ViewAllTransaction : AppCompatActivity() {
                 }
                 transRecyclerView.adapter = transactionAdapter
         }
+
+        //functionality for sorting the transactions
         val btnSort = findViewById<Button>(R.id.sortButton)
 
         btnSort.setOnClickListener{
@@ -76,9 +79,9 @@ class ViewAllTransaction : AppCompatActivity() {
                 val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                 format.isLenient = false
                 try {
-                    val start = format.parse(startDate)
+                    val start = format.parse(startDate)//converting string to date
                     val end = format.parse(endDate)
-                    if (start != null && end != null) {
+                    if (start != null && end != null) {//if user enters a valid date format
                         transactionViewModel.getTransactionsBetweenDates(start,end).observe(this){ filteredTransactions ->
                             transactionAdapter = TransactionAdapter(filteredTransactions){
                                 val transactionId = it.transactionID

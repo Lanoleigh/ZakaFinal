@@ -28,11 +28,13 @@ import com.example.zakazaka.ViewModels.HowToViewModel
 import com.example.zakazaka.ViewModels.SubCategoryViewModel
 import com.example.zakazaka.ViewModels.ViewModelFactory
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 
 
 class CreateCategory : AppCompatActivity() {
     private var categoryId: Long = 0
     private var userId: Long = 0
+    val howtoViewModel = HowToViewModel()
     lateinit var categoryViewModel : CategoryViewModel
     lateinit var subCategoryViewModel: SubCategoryViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +52,7 @@ class CreateCategory : AppCompatActivity() {
         userId = sharedPref.getLong("LOGGED_USER_ID", 0)
 
         //initalizes the HowToView viewModel
-        val howtoViewModel = HowToViewModel()
+
         howtoViewModel.accountViewModel =
             AccountViewModel(AccountRepository(AppDatabase.getDatabase(this).accountDao()))
         howtoViewModel.budgetGoalViewModel =
@@ -117,7 +119,17 @@ class CreateCategory : AppCompatActivity() {
                 createdCategoryLiveData.observe(this, ) { category ->
                     if (category != null) {
                         Toast.makeText(this, "Category created successfully", Toast.LENGTH_SHORT).show()
-
+                        howtoViewModel.isHowtoCompleted(userId,this){ completed ->
+                            if(!completed) {//checks if user has completed the tutorial
+                                val intent = Intent(this, HowToGetStarted::class.java)
+                                intent.putExtra("USER_ID", userId)
+                                startActivity(intent)
+                            } else{// if user completed the tutorial they will be sent to the dashboard page
+                                val intent = Intent(this, Dashboard::class.java)
+                                intent.putExtra("USER_ID", userId)
+                                startActivity(intent)
+                            }
+                        }
                         // Save the created category ID into SharedPreferences
                         val sharedPref = getSharedPreferences("BudgetPrefs", Context.MODE_PRIVATE)
                         with(sharedPref.edit()) {
