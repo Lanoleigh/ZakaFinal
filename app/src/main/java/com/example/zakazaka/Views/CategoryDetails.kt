@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -139,6 +140,11 @@ class CategoryDetails : AppCompatActivity() {
                     Toast.makeText(this,"Please enter correct date format: dd/MM/yyyy",Toast.LENGTH_LONG).show()
                 }
             }
+            val btnCatDetails = findViewById<ImageView>(R.id.btnCatDetails)
+            btnCatDetails.setOnClickListener {
+                finish()
+            }
+
         }
 
     }

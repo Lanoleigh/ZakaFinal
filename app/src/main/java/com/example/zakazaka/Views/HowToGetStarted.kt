@@ -3,6 +3,7 @@ package com.example.zakazaka.Views
 import android.content.Intent
 import android.os.Bundle
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -108,5 +109,11 @@ class HowToGetStarted : AppCompatActivity() {
                 txtSetUpExCategory.isEnabled = false
             }
         }
+
+        val btnHowToBack = findViewById<ImageView>(R.id.btnHowToBack)
+        btnHowToBack.setOnClickListener {
+            finish()
+        }
+
     }
 }

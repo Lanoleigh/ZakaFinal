@@ -64,6 +64,12 @@ class AddTransaction : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val btnAddTransBack = findViewById<ImageView>(R.id.btnAddTransBack)
+        btnAddTransBack.setOnClickListener {
+            finish()
+        }
+
         //initialising the viewModelFactory
         val factory = ViewModelFactory(
             UserRepository(AppDatabase.getDatabase(this).userDao()),
@@ -232,4 +238,6 @@ class AddTransaction : AppCompatActivity() {
             Toast.makeText(this,"Camera Persmission is required",Toast.LENGTH_LONG).show()
         }
     }
+
+
 }

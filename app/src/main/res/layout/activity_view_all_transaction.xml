@@ -15,8 +15,10 @@
         android:padding="16dp">
 
         <ImageView
+            android:id="@+id/btnViewAllTransBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:clickable="true"
             android:contentDescription="Back"
             android:src="@drawable/ic_back" />
 

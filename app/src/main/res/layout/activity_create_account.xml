@@ -12,6 +12,14 @@
         android:orientation="vertical"
         android:padding="24dp">
 
+        <ImageView
+            android:id="@+id/btnCreateAccBack"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_alignParentStart="true"
+            android:clickable="true"
+            android:src="@drawable/ic_back" />
+
         <!-- Gradient Header Panel -->
 
         <!-- Full Name -->
@@ -27,6 +35,8 @@
             android:outlineAmbientShadowColor="@color/zakaGradientEnd"
             android:padding="24dp"
             android:topRightRadius="24dp">
+
+
 
             <TextView
                 android:layout_width="wrap_content"

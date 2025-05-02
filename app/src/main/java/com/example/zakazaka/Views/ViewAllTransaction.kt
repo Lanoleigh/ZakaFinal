@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -95,6 +96,10 @@ class ViewAllTransaction : AppCompatActivity() {
                     Toast.makeText(this,"Invalid date format", Toast.LENGTH_LONG).show()
                 }
             }
+        }
+        val btnViewAllTransBack = findViewById<ImageView>(R.id.btnViewAllTransBack)
+        btnViewAllTransBack.setOnClickListener {
+            finish()
         }
 
 

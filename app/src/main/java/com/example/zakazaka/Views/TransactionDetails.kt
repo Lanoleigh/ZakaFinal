@@ -68,5 +68,12 @@ class TransactionDetails : AppCompatActivity() {
             }
         }
 
+        val btnTransDetailsBack = findViewById<ImageView>(R.id.btnTransDetailsBack)
+        btnTransDetailsBack.setOnClickListener {
+            finish()
+        }
+
+
+
     }
 }

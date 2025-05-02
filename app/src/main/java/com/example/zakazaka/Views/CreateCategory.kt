@@ -28,6 +28,7 @@ import com.example.zakazaka.ViewModels.HowToViewModel
 import com.example.zakazaka.ViewModels.SubCategoryViewModel
 import com.example.zakazaka.ViewModels.ViewModelFactory
 import android.content.Context.MODE_PRIVATE
+import android.widget.ImageView
 
 
 class CreateCategory : AppCompatActivity() {
@@ -44,6 +45,13 @@ class CreateCategory : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val btnCreateCatBack = findViewById<ImageView>(R.id.btnCreateCatBack)
+        btnCreateCatBack.setOnClickListener {
+            finish()
+        }
+
+
 
         // Retrieve the user ID from SharedPreferences
         val sharedPref = getSharedPreferences("BudgetAppPrefs", MODE_PRIVATE)
