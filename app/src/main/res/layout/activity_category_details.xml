@@ -7,7 +7,7 @@
     android:background="@drawable/bg_gradient_green"
     android:orientation="vertical"
     android:padding="16dp">
-
+    <!-- (Android Developers, 2025) -->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -94,7 +94,7 @@
             <!-- RecyclerView for Subcategories -->
 
             <!-- Remaining Balance -->
-
+            <!-- (GeeksforGeeks, 2025) -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/subcategoryRecyclerView"
                 android:layout_width="match_parent"

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient_green"
     android:fillViewport="true">
-
+    <!-- (Android Developers, 2025) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             android:layout_marginBottom="24dp"
             android:orientation="horizontal"
             android:weightSum="3">
-
+            <!-- (Stack Overflow, 2025) -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="100dp"
@@ -91,7 +91,7 @@
                     android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
+            <!-- (Stack Overflow, 2025) -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="100dp"
@@ -114,7 +114,7 @@
                     android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
+            <!-- (Stack Overflow, 2025) -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="100dp"
@@ -185,7 +185,7 @@
             android:columnOrderPreserved="false"
             android:rowCount="2"
             android:useDefaultMargins="true">
-
+            <!-- (Stack Overflow, 2025) -->
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -229,3 +229,12 @@
         </GridLayout>
     </LinearLayout>
 </ScrollView>
+    <!-- GeeksforGeeks. (n.d.). RecyclerView in Android with Example. Retrieved May 2, 2025, from https://www.geeksforgeeks.org/android-recyclerview/
+
+Android Developers. (n.d.). Create dynamic lists with RecyclerView. Retrieved May 2, 2025, from https://developer.android.com/develop/ui/views/layout/recyclerview
+
+Android Developers. (n.d.). Material Design Components. Retrieved May 2, 2025, from https://developer.android.com/guide/topics/ui/look-and-feel
+
+GeeksforGeeks. (n.d.). Android ViewModel Architecture. Retrieved May 2, 2025, from https://www.geeksforgeeks.org/android-viewmodel-architecture/
+
+Stack Overflow. (n.d.). How to create custom button in Android using XML Styles. Retrieved May 2, 2025, from https://stackoverflow.com/questions/18507351/how-to-create-custom-button-in-android-using-xml-styles-->

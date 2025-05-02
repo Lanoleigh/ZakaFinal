@@ -6,6 +6,7 @@
     android:background="@drawable/bg_gradient_green"
     android:orientation="vertical"
     android:padding="16dp">
+    <!-- (Android Developers, 2025) -->
     <!-- Top Bar -->
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,7 +30,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
     </RelativeLayout>
-
+    <!-- (GeeksforGeeks, 2025) -->
     <!-- Date Filter -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -96,7 +97,7 @@
         android:textColor="@color/zakaWhite"
         android:textStyle="bold" />
 
-
+    <!-- (GeeksforGeeks, 2025) -->
     <!-- RecyclerView Placeholder -->
     <LinearLayout
         android:id="@+id/sampleTransactions"
@@ -116,3 +117,12 @@
 
 
 </LinearLayout>
+    <!-- GeeksforGeeks. (n.d.). RecyclerView in Android with Example. Retrieved May 2, 2025, from https://www.geeksforgeeks.org/android-recyclerview/
+
+        Android Developers. (n.d.). Create dynamic lists with RecyclerView. Retrieved May 2, 2025, from https://developer.android.com/develop/ui/views/layout/recyclerview
+
+        Android Developers. (n.d.). Material Design Components. Retrieved May 2, 2025, from https://developer.android.com/guide/topics/ui/look-and-feel
+
+        GeeksforGeeks. (n.d.). Android ViewModel Architecture. Retrieved May 2, 2025, from https://www.geeksforgeeks.org/android-viewmodel-architecture/
+
+        Stack Overflow. (n.d.). How to create custom button in Android using XML Styles. Retrieved May 2, 2025, from https://stackoverflow.com/questions/18507351/how-to-create-custom-button-in-android-using-xml-styles-->

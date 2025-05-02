@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:padding="16dp">
-
+    <!-- (Android Developers, 2025) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,6 +58,7 @@
             android:textColor="#888888"
             android:textSize="12sp" />
 
+        <!-- (StackOverflow, 2025) -->
         <!-- Budget Limit -->
         <TextView
             android:layout_width="match_parent"
@@ -118,7 +119,7 @@
             android:textSize="12sp" />
 
         <!-- Subcategory Budget Limit -->
-
+        <!-- (StackOverflow, 2025) -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -195,3 +196,12 @@
             android:textColor="#FFFFFF" />
     </LinearLayout>
 </ScrollView>
+    <!-- GeeksforGeeks. (n.d.). RecyclerView in Android with Example. Retrieved May 2, 2025, from https://www.geeksforgeeks.org/android-recyclerview/
+
+        Android Developers. (n.d.). Create dynamic lists with RecyclerView. Retrieved May 2, 2025, from https://developer.android.com/develop/ui/views/layout/recyclerview
+
+        Android Developers. (n.d.). Material Design Components. Retrieved May 2, 2025, from https://developer.android.com/guide/topics/ui/look-and-feel
+
+        GeeksforGeeks. (n.d.). Android ViewModel Architecture. Retrieved May 2, 2025, from https://www.geeksforgeeks.org/android-viewmodel-architecture/
+
+        Stack Overflow. (n.d.). How to create custom button in Android using XML Styles. Retrieved May 2, 2025, from https://stackoverflow.com/questions/18507351/how-to-create-custom-button-in-android-using-xml-styles-->
