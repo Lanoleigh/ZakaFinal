@@ -14,7 +14,7 @@ import androidx.room.PrimaryKey
     ],
 
     indices = [Index(value = ["userID"])]
-)
+)//(Tonnie, 2024)
 data class BudgetGoalEntity (
     @PrimaryKey(autoGenerate = true) val budgetGoalID : Long = 0,
     var minAmount : Double,
