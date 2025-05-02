@@ -67,13 +67,24 @@ class HomeFragment : Fragment() {
 
            recentTransactionRecyclerView.adapter = transactionAdpater
        }
-
+        var budgetGoalAmt :Double = 0.0
         budgetGoalViewModel.getAllBudgetGoals().observe(viewLifecycleOwner) { budgetGoals ->
             val latestBudgetGoals = budgetGoals.takeLast(1)
             latestBudgetGoals.forEach { budgetGoal ->
+                budgetGoalAmt = budgetGoal.maxAmount
                 view.findViewById<TextView>(R.id.txtTotalMonthlyBudget).text = "Total Monthly Budget R${budgetGoal.maxAmount.toString()}"
             }
         }
+        transactionViewModel.getAllTransactions().observe(viewLifecycleOwner) { transactions ->
+            var remainingAmt = transactions.sumOf { it.amount }
+            remainingAmt = budgetGoalAmt - remainingAmt
+            view.findViewById<TextView>(R.id.txtAvailableRemaining).text = "Available Remaining R${remainingAmt.toString()}"
+        }
+        transactionViewModel.getAllTransactions().observe(viewLifecycleOwner) { transactions ->
+            val amtSpent = transactions.sumOf { it.amount }
+            view.findViewById<TextView>(R.id.txtAmountSpent).text = "You have spent\nR${amtSpent.toString()}"
+        }
+
         val btnDigitalAccount = view.findViewById<Button>(R.id.btnDigitalAccount)
         btnDigitalAccount.setOnClickListener {
             val intent = Intent(activity, AccountActivity::class.java)

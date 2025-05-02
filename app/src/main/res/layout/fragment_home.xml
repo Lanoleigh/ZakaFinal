@@ -143,15 +143,28 @@
                     android:textColor="#000000" />
 
                 <TextView
+                    android:id="@+id/txtAvailableRemaining"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/border_button"
                     android:padding="12dp"
-                    android:text="Available Remaining\nR500\n-50%"
+                    android:text="Available Remaining\nR500"
                     android:textAlignment="center"
                     android:textColor="#000000" />
             </LinearLayout>
+            <TextView
+                android:id="@+id/txtAmountSpent"
+                android:layout_width="190dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_button"
+                android:padding="12dp"
+                android:text="You have spent:\n R500"
+                android:textAlignment="center"
+                android:textColor="#000000" />
 
 
 

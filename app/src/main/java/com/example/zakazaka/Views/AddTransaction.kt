@@ -207,6 +207,8 @@ class AddTransaction : AppCompatActivity() {
         val format = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
         return format.parse(this)?: Date()
     }
+
+    // this code was adapted from : https://stackoverflow.com/questions/46127064/capture-and-save-image-with-kotlin-in-android-studio
     private val takePictureLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()) { takePicure ->
         val uri = imageUri
         if(takePicure){
@@ -216,6 +218,7 @@ class AddTransaction : AppCompatActivity() {
         }
 
     }
+    //reference this
     private fun launchCamera(){
         val timeStamp = SimpleDateFormat("yyyyMM_HHmmss",Locale.getDefault()).format(Date())
         val fileName = "photo_$timeStamp.jpg"
@@ -233,3 +236,6 @@ class AddTransaction : AppCompatActivity() {
         }
     }
 }
+/*
+* Colocho, S. (2017). Capture and save image with Kotlin in Android Studio. [online] Stack Overflow. Available at: https://stackoverflow.com/questions/46127064/capture-and-save-image-with-kotlin-in-android-studio.
+* */
