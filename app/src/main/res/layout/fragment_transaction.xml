@@ -29,14 +29,6 @@
                     android:elevation="4dp"
                     android:padding="16dp">
 
-                    <ImageView
-                        android:id="@+id/backArrow"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_back"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true" />
-
                     <TextView
                         android:id="@+id/pageTitle"
                         android:layout_width="wrap_content"
@@ -54,37 +46,43 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:layout_marginTop="24dp">
+                    android:layout_marginTop="14dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:weightSum="2"
-                        android:orientation="horizontal"
+
+                        android:layout_marginBottom="0dp"
                         android:gravity="center"
-                        android:layout_marginBottom="8dp">
+                        android:orientation="horizontal"
+                        android:weightSum="2">
 
                         <!-- Income -->
-                        <Button
-                            android:layout_width="0dp"
-                            android:layout_height="70dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            android:backgroundTint="@color/primaryColour"
-                            android:elevation="6dp"
-                            android:text="+ Income"
-                            android:textColor="#000000" />
 
                         <!-- Expense -->
+
                         <Button
-                            android:layout_width="0dp"
-                            android:layout_height="70dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:backgroundTint="@color/primaryColour"
-                            android:elevation="6dp"
-                            android:text="✂ Expense"
-                            android:textColor="#000000" />
+                            android:id="@+id/btnViewTransactions"
+                            android:layout_width="160dp"
+                            android:layout_height="80dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="@color/primaryColour2"
+                            android:text="View Transactions"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/bAddNewTransactions"
+                            android:layout_width="160dp"
+                            android:layout_height="80dp"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="@color/primaryColour2"
+                            android:text="Add New Transaction"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="bold" />
+
                     </LinearLayout>
 
                     <!-- Transfer (separate row) -->
@@ -114,16 +112,7 @@
                     android:layout_height="match_parent" />
 
                 <!-- View Receipts Button -->
-                <Button
-                    android:id="@+id/btnViewTransactions"
-                    android:layout_width="300dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="32dp"
-                    android:backgroundTint="@color/primaryColour2"
-                    android:text="View Transactions"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
+
 
                 <!-- Recently Uploaded Receipts -->
                 <TextView
@@ -189,15 +178,6 @@
                 </LinearLayout>
 
                 <!-- Add New Transaction -->
-                <Button
-                    android:id="@+id/bAddNewTransactions"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:backgroundTint="@color/primaryColour2"
-                    android:text="Add New Transaction"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold" />
 
 
 

@@ -38,15 +38,8 @@ class TransactionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_transaction, container, false)
+        return inflater.inflate(R.layout.fragment_transaction, container, false)
 
-        val btnAddTransactionPage =  view.findViewById<Button>(R.id.bAddNewTransactions)
-        btnAddTransactionPage.setOnClickListener{
-            val intent = Intent(requireContext(),AddTransaction::class.java)
-            startActivity(intent)
-        }
-
-        return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -69,6 +62,9 @@ class TransactionFragment : Fragment() {
         transactionRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         transactionViewModel.getAllTransactions().observe(viewLifecycleOwner){ transactions ->
+            if(transactions == null){
+                return@observe
+            }
             val latestTransactions = transactions.sortedByDescending { it.date }.take(3)
             transactionAdapter = TransactionAdapter(latestTransactions){}
             transactionRecyclerView.adapter = transactionAdapter
@@ -79,6 +75,14 @@ class TransactionFragment : Fragment() {
             val intent = Intent(requireContext(), ViewAllTransaction::class.java)
             startActivity(intent)
         }
+
+        val btnAddTransactionPage =  view.findViewById<Button>(R.id.bAddNewTransactions)
+        btnAddTransactionPage.setOnClickListener{
+            val intent = Intent(requireContext(),AddTransaction::class.java)
+            startActivity(intent)
+        }
+        
+
 
 
 
