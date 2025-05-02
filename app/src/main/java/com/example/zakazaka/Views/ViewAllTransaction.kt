@@ -49,7 +49,7 @@ class ViewAllTransaction : AppCompatActivity() {
             TransactionRepository(AppDatabase.getDatabase(this).transactionDao())
         )
 
-        val sharedPref = getSharedPreferences("BudgetAppPrefs", MODE_PRIVATE)
+        val sharedPref = getSharedPreferences("BudgetAppPrefs", MODE_PRIVATE) //(Android Developer, 2025)
         val userId = sharedPref.getLong("LOGGED_USER_ID", 0)
         transactionViewModel = ViewModelProvider(this,factory)[TransactionViewModel::class.java]
         transRecyclerView = findViewById(R.id.transactionsRecyclerView)
